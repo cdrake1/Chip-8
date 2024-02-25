@@ -20,12 +20,12 @@ To create an environment for this project we are going to need a few things:
 
 ### Installing Node and TS...
 
-####Mac
+#### Mac
 1. Use Homebrew to install Node.js by running the command: "brew install node" in your terminal. If you dont have Homebrew and you are on MacOs... you need it immedietly...
 2. Install TypeScript by running: "npm install -g typescript"
 3. Finally install Node.js dependencies with: "npm install"
 
-####Windows
+#### Windows
 
 - TODO
 
