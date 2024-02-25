@@ -1,0 +1,33 @@
+{
+  "name": "chip-8",
+  "version": "1.0.0",
+  "description": "Chip-8 emulator written in Typescript",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdrake1/Chip-8.git"
+  },
+  "keywords": [
+    "CHIP-8",
+    "emulator",
+    "TypeScript",
+    "npm",
+    "node"
+  ],
+  "author": "cdrake1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdrake1/Chip-8/issues"
+  },
+  "homepage": "https://github.com/cdrake1/Chip-8#readme",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
