@@ -1,22 +1,28 @@
+/*
+    Hardware file
+    Used to create hardware for Chip-8
+*/
+
+//import memory
 import { mem } from "./mem";
 
-export class hardware { //parent class
+//hardware class -- parent class
+export class hardware {
+    idNum: number;  //id numbers associated with hardware
+    name: string;   //name of the hardware
+    debug: boolean; //flag for debugging
 
-    idNum: number;
-    name: string;
-    debug: boolean;
-
-    constructor (id: number, name: string){ //parent constructor
+    //hardware constructor -- builds different instances of the interpreters hardware
+    constructor (id: number, name: string){
         this.idNum = id;
         this.name = name;
         this.debug = true; //set default true
     }
 
-    public memDebug = true; //debug flags for clock, memory, and cpu
-    public cpuDebug = true;
-    public clockDebug = true; 
+    //log function --  outputs creation of hardware
+    public log (message: string){
 
-    public log (message: string){ //prints creation of hardware if debug true
+        //check if the debug flag is set
         if(this.debug){
             let time = new Date().getMilliseconds();
             console.log("[HW - " + this.name + " id: " + this.idNum + " - " + time +"]: " + message);

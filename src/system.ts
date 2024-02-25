@@ -1,40 +1,38 @@
-// import statements for hardware and CPU
+/*
+    System file
+    Used to turn the system on and off
+    Also creates instances of hardware
+*/
+
+//import hardware, cpu, and memory
 import {cpu} from "./hardware/cpu";
 import { hardware } from "./hardware/hardware";
 import {mem} from "./hardware/mem";
 
-export class System extends hardware { //child class of hardware
-   
-    private _cpu : cpu = null;
-    private _mem : mem = null;
-    public running: boolean = false;
+//system class -- child class of hardware
+export class System extends hardware {
+    private _cpu : cpu = null; //create cpu
+    private _mem : mem = null; //create cpu
+    public running: boolean = false; //is the system on?
 
-    constructor(id: number, name: string) { //create hardware for cpu and system
+    //system constructor -- creates the system and instances of hardware(cpu, mem)
+    constructor(id: number, name: string) {
         super(id, name); //pass system to hardware constructor
-
         this._cpu = new cpu(0, "CPU"); //create new cpu hardware
         this._mem = new mem(0, "RAM"); //create new memory hardware
-
-
-        /*
-        Start the system (Analogous to pressing the power button and having voltages flow through the components)
-        When power is applied to the system clock, it begins sending pulses to all clock observing hardware
-        components so they can act on each clock cycle.
-         */
-        this.startSystem(); //start the system
+        this.startSystem(); //start the system(press the power button)
     }
 
-    public startSystem(): boolean { //log both system and cpu as created
+    //turn the system on
+    public startSystem(): boolean {
         this.log("created");
         this._cpu.log("created");
-        //this._mem.log("created - Addressable space : " + this._mem.addressableSpace()); //created is message passed
-       
         return true;
     }
 
-    public stopSystem(): boolean { //turns of the system
+    //turns the system off
+    public stopSystem(): boolean {
         return false;
     }
 }
-
-let system: System = new System(0, "System"); //create new version of system
+let system: System = new System(0, "System"); //create an instance of system
