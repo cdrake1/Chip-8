@@ -7,7 +7,7 @@
 import { hardware } from "./hardware";
 
 //memory class -- child class of hardware
-export class mem extends hardware{
+export class memory extends hardware{
 
     //memory constructor -- creates the memory
     constructor(id: number, name: string){

@@ -4,7 +4,7 @@
 */
 
 //import memory
-import { mem } from "./mem";
+import { memory } from "./memory";
 
 //hardware class -- parent class
 export class hardware {
