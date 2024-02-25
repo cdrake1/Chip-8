@@ -1,3 +1,5 @@
 tdl
 
 - focus on building out the cpu rn
+- finish readme for windows.. add linux?
+- thinking about separating some of the things they put in cpu like mem or keyboard?

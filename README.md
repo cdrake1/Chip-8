@@ -35,7 +35,6 @@ To create an environment for this project we are going to need a few things:
 2. run the command **"npm start"** in terminal
 
 ## Other Resources
-https://github.com/taniarascia/chip8/blob/master/classes/RomBuffer.js
-https://www.freecodecamp.org/news/creating-your-very-own-chip-8-emulator/#:~:text=One%20of%20the%20simplest%20ways,%2C%20more%20in%2Ddepth%20emulators.
-http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#2.2
-https://www.taniarascia.com/writing-an-emulator-in-javascript-chip8/#memory
+[taniarascia](https://github.com/taniarascia/chip8/blob/master/classes/RomBuffer.js)
+[freecodecampe](https://www.freecodecamp.org/news/creating-your-very-own-chip-8-emulator/#:~:text=One%20of%20the%20simplest%20ways,%2C%20more%20in%2Ddepth%20emulators.)
+[devernay](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#2.2)

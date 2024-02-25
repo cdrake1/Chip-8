@@ -8,11 +8,13 @@
 import { cpu } from "./hardware/cpu";
 import { hardware } from "./hardware/hardware";
 import { memory } from "./hardware/memory";
+import { techmoKeyboard } from "./hardware/techmoKeyboard";
 
 //system class -- child class of hardware
 export class System extends hardware {
     private _cpu : cpu; //create cpu
-    private _mem : memory; //create cpu
+    private _mem : memory; //create memory
+    private _keyboard : techmoKeyboard; //creates keyboard
     public running: boolean; //is the system on?
 
     //system constructor -- creates the system and instances of hardware(cpu, mem)
@@ -20,14 +22,17 @@ export class System extends hardware {
         super(id, name); //pass system to hardware constructor
         this._cpu = new cpu(0, "CPU"); //create new cpu hardware
         this._mem = new memory(0, "RAM"); //create new memory hardware
+        this._keyboard = new techmoKeyboard(0, "Keyboard"); //creates new keyboard hardware
         this.running  = false;
         this.startSystem(); //start the system(press the power button)
     }
 
-    //turn the system on
+    //turn the system on and output what hardware was created
     public startSystem(): boolean {
         this.log("created");
         this._cpu.log("created");
+        this._mem.log("created");
+        this._keyboard.log("Elevate Keyboard");
         return true;
     }
 

@@ -3,9 +3,6 @@
     Used to create hardware for Chip-8
 */
 
-//import memory
-import { memory } from "./memory";
-
 //hardware class -- parent class
 export class hardware {
     idNum: number;  //id numbers associated with hardware
