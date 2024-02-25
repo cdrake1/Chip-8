@@ -2,10 +2,10 @@
   "name": "chip-8",
   "version": "1.0.0",
   "description": "Chip-8 emulator written in Typescript",
-  "main": "main.ts",
+  "main": "dist/system.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./dist/main.js"
+    "start": "node ./dist/system.js"
   },
   "repository": {
     "type": "git",
