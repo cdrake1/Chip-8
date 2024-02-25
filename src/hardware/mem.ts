@@ -1,6 +1,6 @@
 /*
     memory file
-    creates the Chip-8 memory and allocates it accordingly
+    creates the Chip-8 memory and loads ROM
 */
 
 //import hardware

@@ -11,6 +11,7 @@ This software draws inspiration and is an adaptation of works created by **Prof.
 - Brian Gormanly Computer Organization and Architecture: [422-tsiraM](https://github.com/MaristGormanly/422-tsiraM)
 - Tania Rascia Walkthrough: [taniaRascia.com](https://www.taniarascia.com/writing-an-emulator-in-javascript-chip8/#memory)
 - Cowgod's Chip-8 reference: [Cowgod](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#2.2)
+- Austin Morlans building a Chip-8 emulator: [Austin Morlan](https://austinmorlan.com/posts/chip8_emulator/)
 
 ## Getting Started and Necessary Setup
 To create an environment for this project we are going to need a few things:
