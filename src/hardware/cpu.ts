@@ -23,6 +23,6 @@ export class cpu extends hardware{
         this.stack  = new Uint8Array(16);
         this.programCounter  = 0x200;
         this.stackPointer = 0x00;
-        this.indexRegister 0x0000;
+        this.indexRegister = 0x0000;
     }
 }

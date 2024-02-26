@@ -19,7 +19,7 @@ To create an environment for this project we are going to need a few things:
 2. **TypeScript**
 3. **a terminal or commandline**
 
-### Installing Node and TS...
+### Installing Node and TypeScript...
 
 #### Mac
 1. Use **Homebrew** to install Node.js by running the command: **"brew install node"** in your terminal. If you dont have Homebrew and you are on MacOs... you need it immedietly...
@@ -27,8 +27,14 @@ To create an environment for this project we are going to need a few things:
 3. Finally install Node.js dependencies with: **"npm install"**
 
 #### Windows
+1. Go to **nodejs.ord/en** and install the long term supported version, then follow the installer prompts.
+2. Open Command Prompt and run **npm -v**, if you see a something like 10.2.4 (your numbers may vary), then you've correctly installed node
+3. Finally run **npm install -g typescript**
 
-- TODO
+#### Linux (Ubuntu LTS - may not work for other distributions)
+1. Open Terminal and run **sudo apt update** followed by **sudo apt full-upgrade -y** to update your system packages
+2. Next run the command **sudo apt install nodejs npm -y** to install node
+3. Finally run the following commands seperately to verify the success of your installation: **node --version** & **npm --version**
 
 ## Starting The System!
 1. Compile TypeScript into JavaScript by running the basch script file **'c'**. If you run into an error trying to run this you most likely need to give the file executive permissions... **"chmod +x c"**
