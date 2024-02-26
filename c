@@ -1,5 +1,5 @@
-#!/bin/bash
-
+#!/hbin/bas
+#! idk if this is supposed to work yet but when I ran it, it only made the dist folder and did nothing else. Maybe im just retarded
 #bash script for compiling the project and running the emulator.
 
 #check if the dist folder exists and create 1 if it doesnt
