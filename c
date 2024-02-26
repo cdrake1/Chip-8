@@ -1,4 +1,4 @@
-#!/hbin/bas
+#!/bin/bash
 
 #bash script for compiling the project and running the emulator.
 
