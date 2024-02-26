@@ -2,10 +2,10 @@
 This project is a **Chip-8 interpreter and virtual machine** written in **Typescript** and running on **Node.js**. You may be asking **"What is Chip-8?"** Well... defined by Wikipedia, Chip-8 "is an interpreted programming language, developed by Joseph Weisbecker made on his 1802 Microprocessor." So to clarify Chip-8 is not an emulator, but an **interpreted programming language**. Nevertheless, We can use our interpreter to run basic **Chip-8 programs and video games!**
 
 ## Purpose
-There are a lot of reasons that I wanted to work on a project like this. Not only can I gain hands on experience with a larger project environment, but I can explore new programming languages, and understand hardware principles. Most importantly I get to collaborate with friends!
+There are a lot of reasons that I wanted to work on a project like this. Not only can I gain hands-on experience with a larger project environment, but I can explore new programming languages, and understand hardware principles. Most importantly I get to collaborate with friends!
 
 ## Credits
-This software draws inspiration and is an adaptation of works created by **Prof. Brian Gormanly and Prof. Alan Labouseur** at Marist College. Although their projects are designed for a 6502 architecture, they provided me with insight on how this project can be organized and developed. Furthermore, I also want to note my use of different resources including articles, GitHub repos, and Reddit posts, which have helped strengthen my understanding of Chip-8 and the different ways it can be implemented.
+This software draws inspiration and is an adaptation of works created by **Prof. Brian Gormanly and Prof. Alan Labouseur** at Marist College. Although their projects are designed for a 6502 architecture, they provided me with insight into how this project can be organized and developed. Furthermore, I also want to note my use of different resources including articles, GitHub repos, and Reddit posts, which have helped strengthen my understanding of Chip-8 and the different ways it can be implemented.
 
 - Alan Labouseur OS: [AlanClasses on GitHub](https://github.com/AlanClasses/TSOS-2019)
 - Brian Gormanly Computer Organization and Architecture: [422-tsiraM](https://github.com/MaristGormanly/422-tsiraM)
@@ -17,27 +17,27 @@ This software draws inspiration and is an adaptation of works created by **Prof.
 To create an environment for this project we are going to need a few things:
 1. **Node.js / npm**
 2. **TypeScript**
-3. **a terminal or commandline**
+3. **A terminal or command line**
 
 ### Installing Node and TypeScript...
 
 #### Mac
-1. Use **Homebrew** to install Node.js by running the command: **"brew install node"** in your terminal. If you dont have Homebrew and you are on MacOs... you need it immedietly...
+1. Use **Homebrew** to install Node.js by running the command: **"brew install node"** in your terminal. If you don't have Homebrew and you are on macOS... you need it immediately...
 2. Install TypeScript by running: **"npm install -g typescript"**
-3. Finally install Node.js dependencies with: **"npm install"**
+3. Finally install Node.js dependencies with **"npm install"**
 
 #### Windows
-1. Go to **nodejs.ord/en** and install the long term supported version, then follow the installer prompts.
-2. Open Command Prompt and run **npm -v**, if you see a something like 10.2.4 (your numbers may vary), then you've correctly installed node
+1. Go to **nodejs.ord/en** and install the long-term supported version, then follow the installer prompts.
+2. Open Command Prompt and run **npm -v**, if you see something like 10.2.4 (your numbers may vary), then you've correctly installed node
 3. Finally run **npm install -g typescript**
 
 #### Linux (Ubuntu LTS - may not work for other distributions)
 1. Open Terminal and run **sudo apt update** followed by **sudo apt full-upgrade -y** to update your system packages
 2. Next run the command **sudo apt install nodejs npm -y** to install node
-3. Finally run the following commands seperately to verify the success of your installation: **node --version** & **npm --version**
+3. Finally run the following commands separately to verify the success of your installation: **node --version** & **npm --version**
 
 ## Starting The System!
-1. Compile TypeScript into JavaScript by running the basch script file **'c'**. If you run into an error trying to run this you most likely need to give the file executive permissions... **"chmod +x c"**
+1. Compile TypeScript into JavaScript by running the bash script file **'c.sh'**. If you run into an error trying to run this you most likely need to give the file executive permissions... **"chmod +x c.sh"**
 2. run the command **"npm start"** in terminal
 
 ## Other Resources
