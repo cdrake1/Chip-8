@@ -1,5 +1,4 @@
 tdl
 
 - focus on building out the cpu rn
-- finish readme for windows.. add linux? ## done
-- thinking about separating some of the things they put in cpu like mem or keyboard? ## did you alr complete this?
+- fix bash script issue
