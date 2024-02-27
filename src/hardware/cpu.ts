@@ -26,12 +26,92 @@ export class cpu extends hardware{
         this.indexRegister = 0x0000;
     }
 
-    //
-    public fetch(){}
+    //Call and coordinate fetch, decode and execute
+    public step()
+    {
+        //Fetch the opcode
+        const opcode = this.fetch();
 
-    public decode(){}
+        //decode the opcode
+        const instruction = this.decode(opcode);
 
-    public execute(){}
+        //run the instruction per opcode
+        this.execute(instruction);
+        
+    }//step
+  
+    //Get address from memory
+    public fetch()
+    {return(memory[this.programCounter]);}//fetch
 
-    public step(){}
+    //decode opcode
+    public decode(Inputopcode)
+    {return this.disassemble(Inputopcode);}//decode
+
+    //Execute the Instruction with 36 Switch Cases
+    public execute(Inputinstruction)
+    {
+
+    }//execute
+
+    //find instruction from opcode
+    public disassemble(inputOpcode)
+    {
+      
+
+    }//disassemble
 }
+
+//INSTRUCTION SET 
+const INSTRUCTIONSET = [
+/*
+    TEMPLATE FOR INSTRUCTION
+    {
+        id: 'INSTRUCTION_ID',
+        name: 'INSTRUCTION_NAME',
+        mask: 0x0000, // Set the appropriate mask
+        pattern: 0x0000, // Set the appropriate pattern
+        arguments: [
+        { mask: 0x0000, shift: 0, type: 'TYPE' },
+        { mask: 0x0000, shift: 0, type: 'TYPE' },
+        ]
+    },  
+*/
+    {
+        id: 'SYS_ADDR', //Instruction #1
+        name: 'SYS',
+        mask: 0xf000, // Only the first digit (nibble) is significant
+        pattern: 0x0000, // Since this instruction is ignored, the pattern is not relevant
+        arguments: [
+        { mask: 0x0fff, shift: 0, type: 'I' } // Address (NNN)
+        ]
+    },
+
+    {
+        id: 'CLS', //Instruction #2
+        name: 'CLS',
+        mask: 0xffff, // Full opcode is significant
+        pattern: 0x00E0, // Opcode pattern for CLS
+        arguments: [] // No arguments for CLS
+      },
+
+      {
+        id: 'RET', //Instruction #3
+        name: 'RET',
+        mask: 0xffff, // Full opcode is significant
+        pattern: 0x00EE, // Opcode pattern for RET
+        arguments: [] // No arguments for RET
+      },
+
+    { id: 'ADD_VX_VY',
+    name: 'ADD',
+    mask: 0xf00f,
+    pattern: 0x8004,
+    arguments: [
+      { mask: 0x0f00, shift: 8, type: 'R' },
+      { mask: 0x00f0, shift: 4, type: 'R' },
+    ]
+},
+
+
+]
