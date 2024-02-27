@@ -64,27 +64,23 @@ export class monitor extends hardware {
     }//clear
 
     //Paint the canvas
-    paintCanvas() 
-    {
-        //Clear canvas and make it all black
+    paintCanvas() {
+        // Clear canvas and make it all black
         this.canvasCtx.fillStyle = '#000';
-        this.canvasCtx.fillRect(0,0,this.canvas.width,this.canvas.height)
-
-        //loop through array and update screen
-        for(let i = 0;i<this.rows*this.cols;i++)
-        {    
-            let x = (i % this.cols) * this.scale; //convert to scaled 2d array
-            let y = Math.floor(i /this.cols) * this.scale;// convert to scaled 2d array
-
-            //Determine if the pixel is on, and then represent that by making it white
-            if(this.display[i] == 1)
-            {
-            
-            this.canvasCtx.fillStyle = '#FFF';
-            this.canvasCtx.fillRect(x,y,this.scale,this.scale)
-            }//if
-         }//for
-    }//paintCanvas
+        this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    
+        // Loop through array and update screen
+        for (let i = 0; i < this.rows * this.cols; i++) {
+            let x = (i % this.cols) * this.scale; // Convert to scaled 2D array
+            let y = Math.floor(i / this.cols) * this.scale; // Convert to scaled 2D array
+    
+            // Determine if the pixel is on, and then represent that by making it white
+            if (this.display[i] === 1) {
+                this.canvasCtx.fillStyle = '#FFF';
+                this.canvasCtx.fillRect(x, y, this.scale, this.scale);
+            }
+        }
+    }
 
     test()
     {
