@@ -65,7 +65,7 @@ export class cpu extends hardware{
 //INSTRUCTION SET 
 const INSTRUCTIONSET = [
 /*
-    TEMPLATE FOR INSTRUCTION
+    TEMPLATE FOR INSTRUCTIONS ADD 36
     {
         id: 'INSTRUCTION_ID',
         name: 'INSTRUCTION_NAME',
