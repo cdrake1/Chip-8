@@ -1,13 +1,18 @@
 <!-- Done worry about this rn -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <link rel="stylesheet" href="style.css">
+        <title>CHIP-8 EMULATOR</title>
     </head>
     <body>
-        <canvas></canvas>
-
-        <script type="module" src="/src/system.ts"></script>
+        <main>
+            <div class="console">
+                <h1>CHIP-8 EMULATOR</h1>
+                <canvas id = "screen"></canvas>
+                <script type="module" src="/src/system.ts"></script>
+            </div>
+        </main>
     </body>
 </html>
