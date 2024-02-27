@@ -1,3 +1,5 @@
 tdl
+-focus on getting monitor to work (its not function correctly)
+to run the website, run the command **npm install -g http-server**, then cd into **web** and run http-server
 
-- focus on building out the cpu rn
+2 build out cpu
