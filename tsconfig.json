@@ -10,7 +10,7 @@
 
   "include": [
       "src/**/*"
-  ],
+, "dist/hardware/monitor.js", "dist/hardware/hardware.js"  ],
   "exclude": [
     "./node_modules"
   ]
