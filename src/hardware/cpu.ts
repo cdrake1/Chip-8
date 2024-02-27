@@ -25,4 +25,10 @@ export class cpu extends hardware{
         this.stackPointer = 0x00;
         this.indexRegister = 0x0000;
     }
+
+    public fetch(){}
+
+    public decode(){}
+
+    public execute(){}
 }
