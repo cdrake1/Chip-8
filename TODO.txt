@@ -1,5 +1,8 @@
 tdl
--focus on getting monitor to work (its not function correctly)
+-focus on getting monitor to work (its not function correctly - I have a function running in index.ts which isnt working. Should be all black w two white dots at 0,0 and 5,2 but there is none
+ALSO in system.ts monitor isnt working idk how to declare it properly.
+
 to run the website, run the command **npm install -g http-server**, then cd into **web** and run http-server
 
-2 build out cpu
+2 build out cpu - fetch decode execute
+switch is built, so must reference execute from witin each case and feed it instruction, execute will have another switch with executes instruction (or can combine switches if u feel like it idk yet)

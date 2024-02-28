@@ -32,10 +32,10 @@ export class cpu extends hardware{
         //Fetch the opcode
         const opcode = this.fetch();
 
-        //decode the opcode
+        //switch match opcode to instruction
         const instruction = this.decode(opcode);
 
-        //run the instruction per opcode
+        //run the instruction
         this.execute(instruction);
         
     }//step
@@ -57,79 +57,128 @@ export class cpu extends hardware{
     //find instruction from opcode
     public disassemble(inputOpcode)
     {
-      
+        const x = (inputOpcode & 0x0F00) >> 8; //determine x because it is a common reference among instructions
+        const y = (inputOpcode & 0x00F0) >> 4; //determine y because it is a common reference among instructions
+
+        switch(inputOpcode & 0xF000) //Were going to check for a match at the first digit
+        {
+        case 0x0000:
+            switch(inputOpcode) //test for which of 0x0000 it is
+            {
+                case 0x00E0:
+                    //CLR
+                    break;
+                case 0x00EE:
+                    //RET
+                    break;
+            }//switch
+            break;
+        case 0x1000:
+            //JP addr
+            break;
+        case 0x2000:
+            //CALL addr
+            break;
+        case 0x3000:
+            //SE Vx, byte
+            break;
+        case 0x4000:
+            //SNE Vx, byte
+        case 0x5000:
+            //SE Vx, Vy
+            break;
+        case 0x6000:
+            //LD Vx, byte
+        case 0x7000:
+            // ADD Vx, byte
+        case 0x8000:
+            switch(inputOpcode & 0xF00F) //test for which of 0x8000 it is
+                {
+                    case 0x8000:
+                        //LD Vx, Vy
+                        break;
+                    case 0x8001:
+                        //OR Vx, Vy
+                        break;
+                    case 0x8002:
+                        //AND Vx, Vy
+                        break;
+                    case 0x8003:
+                        //XOR Vx, Vy
+                        break;
+                    case 0x8004:
+                        //ADD Vx,Vy
+                        break;
+                    case 0x8005:
+                        //SUB Vx, Vy
+                        break;
+                    case 0x8006:
+                        //SHR Vx {, Vy}
+                        break;
+                    case 0x8007:
+                        //SUBN Vx, Vy
+                        break;
+                    case 0x800E:
+                        //SHL Vx {, Vy}
+                        break;
+                    default:
+                        throw new Error('BAD OPCODE');
+                    }//switch
+            break;
+        case 0x9000:
+            //SNME Vx, Vy
+            break;
+        case 0xA000:
+            //LD I, addr
+            break;
+        case 0xB000:
+            //JP V0, addr
+            break;
+        case 0xC000:
+            //RND Vx, byte
+            break;
+        case 0xD000:
+            //DRW Vx, Vy, nibble
+        case 0xF000:
+            switch(inputOpcode & 0xFF) // check last two digits
+            {
+                case 0x9E:
+                    //SKP Vx
+                    break;
+                case 0xA1:
+                    //SKNP Vx
+                    break;
+                case 0x07:
+                    //LD Vx, DT
+                    break;
+                case 0x0A:
+                    //LD Vx, K
+                    break;
+                case 0x15:
+                    //LD DT, Vx
+                    break;
+                case 0x18:
+                    //LD ST, Vx
+                    break;
+                case 0x1E:
+                    //ADD I, Vx
+                    break;
+                case 0x29:
+                    //LD F, Vx
+                    break;
+                case 0x33:
+                    //LD B, Vx
+                    break;
+                case 0x55:
+                    //LD [I]. Vx
+                case 0x65:
+                    //LD Vx, [I]
+                    break;
+                default:
+                    throw new Error('BAD OPCODE!!');
+            }//switch
+              
+        }//switch
 
     }//disassemble
-}
-
-//INSTRUCTION SET 
-const INSTRUCTIONSET = [
-/*
-    TEMPLATE FOR INSTRUCTIONS ADD 36
-    {
-        id: 'INSTRUCTION_ID',
-        name: 'INSTRUCTION_NAME',
-        mask: 0x0000, // Set the appropriate mask
-        pattern: 0x0000, // Set the appropriate pattern
-        arguments: [
-        { mask: 0x0000, shift: 0, type: 'TYPE' },
-        { mask: 0x0000, shift: 0, type: 'TYPE' },
-        ]
-    },  
-*/
-    {
-        id: 'SYS_ADDR', //Instruction #1
-        name: 'SYS',
-        mask: 0xf000, // Only the first digit (nibble) is significant
-        pattern: 0x0000, // Since this instruction is ignored, the pattern is not relevant
-        arguments: [
-        { mask: 0x0fff, shift: 0, type: 'I' } // Address (NNN)
-        ]
-    },
-
-    {
-        id: 'CLS', //Instruction #2
-        name: 'CLS',
-        mask: 0xffff, // Full opcode is significant
-        pattern: 0x00E0, // Opcode pattern for CLS
-        arguments: [] // No arguments for CLS
-      },
-
-      {
-        id: 'RET', //Instruction #3
-        name: 'RET',
-        mask: 0xffff, // Full opcode is significant
-        pattern: 0x00EE, // Opcode pattern for RET
-        arguments: [] // No arguments for RET
-      },
-      {
-        id: 'JP_ADDR', //Instruction #4 - '1nnn'
-        name: 'JP',
-        mask: 0xf000, // Only the first digit (nibble) is significant
-        pattern: 0x1000, // Pattern because its 1nnn
-        arguments: [
-            { mask: 0x0fff, shift: 0, type: 'addr' } // Address (NNN)
-        ]
-        },
-        {   
-        id: 'CALL_ADDR', //Instruction #5 - '2nnn'
-        name: 'CaLL',
-        mask: 0xf000, // Only the first digit (nibble) is significant
-        pattern: 0x2000, // Pattern because its 2nnn
-        arguments: [
-            { mask: 0x0fff, shift: 0, type: 'addr' } // Address (addr)
-        ]
-        },
-        { 
-        id: 'ADD_VX_VY',
-        name: 'ADD',
-        mask: 0xf00f,
-        pattern: 0x8004,
-        arguments: [
-      { mask: 0x0f00, shift: 8, type: 'R' },
-      { mask: 0x00f0, shift: 4, type: 'R' },
-    ]
-},
-
-
-]
+}//cpu
