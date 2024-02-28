@@ -4,13 +4,13 @@
 */
 
 //import hardware and fs module. Imports module that allows reading and writing to files
-import { System } from "../system";
 import { hardware } from "./hardware";
 import * as fs from 'fs';
 
 //memory class -- child class of hardware
 export class memory extends hardware{
     generalMemory: Uint8Array;  //general memory
+    Programsize: number;
 
     //memory constructor -- creates the memory
     constructor(id: number, name: string){
@@ -32,7 +32,7 @@ export class memory extends hardware{
         for(let i = 0; i < file.length; ++i){
             buffer.push(file[i]);
         }
-
+        this.Programsize = buffer.length;
         this.loadROM(buffer);
     }
 
@@ -47,20 +47,20 @@ export class memory extends hardware{
             this.generalMemory[startAddress + i] = ROMbuf[i];
         }
 
-        this.test();
+        //this.test();
     }
 
     //dumps the memory
-    public memDump(fromAddress: number, toAddress: number){
+    public memDump(fromAddress: number){
         this.log("Memory Dump")
-        for(let i = fromAddress; i <= toAddress; i++){
-            //call hex log function
+        for(let i = fromAddress; i <= this.Programsize; i++){
+            this.hexlog(this.generalMemory[i], 4, i);
         }
         this.log("Memory Dump: complete");
     }
 
-    //test the memory
+    //program to test the memory
     private test(){
-        this.memDump(0x200, 0xFFF);
+        this.memDump(0x200);
     }
 }
