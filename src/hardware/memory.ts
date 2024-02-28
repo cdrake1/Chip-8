@@ -38,7 +38,7 @@ export class memory extends hardware{
     public memDump(fromAddress: number, toAddress: number){
         this.log("Memory Dump")
         for(let i = fromAddress; i <= toAddress; i++){
-            this.hexlog(this.generalMemory[i], 4, i);
+            //call hex log function
         }
         this.log("Memory Dump: complete");
     }
