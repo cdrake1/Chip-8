@@ -24,7 +24,7 @@ export class memory extends hardware{
 
         //error checking
         if(!file){
-            console.log("File Error");
+            throw new Error("Something went wrong when trying to read the file " + filename);
         }
 
         const buffer: number[] = [];
@@ -53,7 +53,7 @@ export class memory extends hardware{
     //dumps the memory
     public memDump(fromAddress: number){
         this.log("Memory Dump")
-        for(let i = fromAddress; i <= this.Programsize; i++){
+        for(let i = fromAddress; i < this.Programsize; i++){
             this.hexlog(this.generalMemory[i], 4, i);
         }
         this.log("Memory Dump: complete");

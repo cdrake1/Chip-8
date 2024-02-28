@@ -18,7 +18,6 @@ export class hardware {
 
     //log function --  outputs creation of hardware
     public log (message: string){
-
         //check if the debug flag is set
         if(this.debug){
             let time = new Date().getMilliseconds();
@@ -26,11 +25,16 @@ export class hardware {
         }
     }
 
+    //setter function for debug
+    public setDebug(debugFlag: boolean){
+        this.debug = debugFlag;
+    }
+
     //outputs hex properly
     public hexlog(theNum: number, desiredLength: number, memAddress: number){
         let hexNum = theNum.toString(16).toUpperCase(); //hex nums are 16 digits long
 
-         //output error message
+        //output error message
         if(theNum > 0xFF){
             console.log("Address : 10000 Contains Value: ERR [hexValue conversion]: number undefined");
         }
