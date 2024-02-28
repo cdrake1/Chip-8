@@ -25,4 +25,30 @@ export class hardware {
             console.log("[HW - " + this.name + " id: " + this.idNum + " - " + time +"]: " + message);
         }
     }
+
+    //hex log -- takes number and length to output properly formatted hex num
+    public hexlog(theNum: number, desiredLength: number, memAddress: number){
+        let hexNum = theNum.toString(16).toUpperCase(); //hex nums are 16 digits long
+
+        if(theNum > 0xFF){  //output error message
+            console.log("Address : 10000 Contains Value: ERR [hexValue conversion]: number undefined");
+        }
+        else{
+            if(hexNum.length == 1){ //pads data in memory
+                hexNum = '0x' + '0' + hexNum;
+            }
+            else{
+                hexNum = '0x' + hexNum;
+            }
+        }
+        let memHex = memAddress.toString(16).toUpperCase(); //creates and pads memory address location
+        if(memHex.length == 1){
+            memHex = '0x000' + memAddress.toString(16).toUpperCase();
+        }
+        else{
+            memHex = '0x00' + memAddress.toString(16).toUpperCase();
+        }
+        
+        this.log("Memory Address " + memHex + " contains data " + hexNum);
+    }
 }
