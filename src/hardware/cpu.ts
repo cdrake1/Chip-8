@@ -102,12 +102,30 @@ const INSTRUCTIONSET = [
         pattern: 0x00EE, // Opcode pattern for RET
         arguments: [] // No arguments for RET
       },
-
-    { id: 'ADD_VX_VY',
-    name: 'ADD',
-    mask: 0xf00f,
-    pattern: 0x8004,
-    arguments: [
+      {
+        id: 'JP_ADDR', //Instruction #4 - '1nnn'
+        name: 'JP',
+        mask: 0xf000, // Only the first digit (nibble) is significant
+        pattern: 0x1000, // Pattern because its 1nnn
+        arguments: [
+            { mask: 0x0fff, shift: 0, type: 'addr' } // Address (NNN)
+        ]
+        },
+        {   
+        id: 'CALL_ADDR', //Instruction #5 - '2nnn'
+        name: 'CaLL',
+        mask: 0xf000, // Only the first digit (nibble) is significant
+        pattern: 0x2000, // Pattern because its 2nnn
+        arguments: [
+            { mask: 0x0fff, shift: 0, type: 'addr' } // Address (addr)
+        ]
+        },
+        { 
+        id: 'ADD_VX_VY',
+        name: 'ADD',
+        mask: 0xf00f,
+        pattern: 0x8004,
+        arguments: [
       { mask: 0x0f00, shift: 8, type: 'R' },
       { mask: 0x00f0, shift: 4, type: 'R' },
     ]
