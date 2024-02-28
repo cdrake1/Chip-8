@@ -33,6 +33,7 @@ export class System extends hardware {
         this._cpu.log("created");
         this._mem.log("created");
         this._keyboard.log("Elevate Keyboard");
+        this._mem.ROMBuffer("roms/SPACE_INVADERS");
         return true;
     }
 
