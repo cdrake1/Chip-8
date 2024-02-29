@@ -16,15 +16,17 @@ export class cpu extends hardware{
     programCounter: number; //16-bit program counter -- holds address of next instruction
     stackPointer: number;   //8-bit int that points to location within the stack
     indexRegister: number;  //16-bit memory address pointer
+    _monitor: monitor; //Monitor instance
 
     //cpu constructor -- creates the cpu and initializes its variables
-    constructor(id: number, name: string) {
+    constructor(id: number, name: string,_monitor: monitor) {
         super(id, name);    //passes cpu to hardware
         this.registers = new Uint8Array(16);
         this.stack  = new Uint8Array(16);
         this.programCounter  = 0x200;
         this.stackPointer = 0x00;
         this.indexRegister = 0x0000;
+        this._monitor = _monitor;
         
     }
 
@@ -39,7 +41,7 @@ export class cpu extends hardware{
         const instruction = this.decode(opcode);
 
         //run the instruction
-        this.execute(instruction);
+        this.execute(instruction,opcode);
         
     }//step
   
@@ -54,10 +56,6 @@ export class cpu extends hardware{
     //find instruction from opcode
     public disassemble(inputOpcode)
     {
-
-        
-        const x = (inputOpcode & 0x0F00) >> 8; //determine x because it is a common reference among instructions
-        const y = (inputOpcode & 0x00F0) >> 4; //determine y because it is a common reference among instructions
         let inputInstruction = "null";
         switch(inputOpcode & 0xF000) //Were going to check for a match at the first digit
         {
@@ -182,8 +180,116 @@ export class cpu extends hardware{
         }//disassemble
 
     //Execute the Instruction with 36 Switch Cases
-    public execute(inputInstruction)
+    public execute(inputInstruction,inputOpcode)
     {
-
+        const x = (inputOpcode & 0x0F00) >> 8; //determine x because it is a common reference among instructions
+        const y = (inputOpcode & 0x00F0) >> 4; //determine y because it is a common reference among instructions
+        switch(inputInstruction)
+        {
+            case "CLR":
+//clears display
+                this._monitor.clear();
+                break;
+            case "RET":
+//The interpreter sets the program counter to top of stack then subtracts 1 from the stack pointer
+                this.programCounter = this.stack[this.stackPointer];
+                this.stack[this.stackPointer] = 0; //may not be needed
+                this.stackPointer--;
+                break;
+            case "JPaddr":
+//The interpreter sets the program counter to nnn.
+                this.programCounter = (inputOpcode & 0x0FFF);
+                break;
+            case "CALLaddr":
+//The interpreter increments the stack pointer, then puts the current PC on the top of the stack.
+//Then the PC is then set to nnn.
+                if (this.stackPointer < 15) { //not overflowed
+                    this.stack[this.stackPointer++] = (this.programCounter >> 8) & 0xFF; // Push high byte
+                    this.stack[this.stackPointer++] = this.programCounter & 0xFF; // Push low byte
+                }//if
+                else {
+                    throw new Error('Stack overflow');
+                }//else
+                this.programCounter = (inputOpcode & 0x0FFF);
+                break;
+            case "SEVxbyte":
+//The interpreter compares register Vx to kk, and if they are equal, increments the program counter by 2.
+                if(this.registers[x] == (inputOpcode && 0x00FF))
+                    this.programCounter += 2;
+                break;
+            case "SNEVxbyte":
+//The interpreter compares register Vx to kk, and if they are not equal, increments the program counter by 2.
+                if(this.registers[x] != (inputOpcode && 0x00FF))
+                    this.programCounter += 2;
+                break;
+            case "SEVxVy":
+//The interpreter compares register Vx to register Vy, and if they are equal, increments the program counter by 2.
+                if(this.registers[x] == this.registers[y])
+                    this.programCounter += 2;
+                break;
+            case "LDVxbyte":
+//The interpreter puts the value kk into register Vx.
+                this.registers[x] = (inputOpcode & 0x00FF);
+                break;
+            case "ADDVxbyte":
+//Adds the value kk to the value of register Vx, then stores the result in Vx.
+                this.registers[x] += (inputOpcode & 0x00FF);
+                break;
+            case "LDVxVy":
+//Stores the value of register Vy in register Vx.
+                this.registers[x] = this.registers[y]
+                break;
+            case "ORVxVy":
+                break;
+            case "VxVy":
+                break;
+            case "XORVxVy":
+                break;
+            case "ADDVxVy":
+                break;
+            case "SUBVxVy":
+                break;
+            case "SHRVxVy":
+                break;
+            case "SUBNVxVy":
+                break;
+            case "SHLVxVy":
+                break;
+            case "SNMEVxVy":
+                break;
+            case "LDIaddr":
+                break;
+            case "JPV0addr":
+                break;
+            case "RNDVxbyte":
+                break;
+            case "DRWVxVynibble":
+                break;
+            case "SKPVx":
+                break;
+            case "SKNPVx":
+                break;
+            case "LDVxDT":
+                break;
+            case "LDVxK":
+                break;
+            case "LDDTVx":
+                break;
+            case "LDSTVx":
+                break;
+            case "ADDIVx":
+                break;
+            case "LDFVx":
+                break;
+            case "LDBVx":
+                break;
+            case "LDIVx":
+                break;
+            case "LDVxI":
+                break;
+            default:
+                throw new Error('BAD INSTRUCTION!');
+        }//switch
+  
     }//execute
 }//cpu

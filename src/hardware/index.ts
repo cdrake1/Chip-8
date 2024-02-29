@@ -5,6 +5,6 @@ import { monitor } from "./monitor";
 const name1: string = "monitor1";
 
 //Create our monitor
-let mainMonitor: monitor = new monitor(1,name1,document.getElementById('screen') as HTMLCanvasElement);
+
 
 mainMonitor.paintCanvas();
