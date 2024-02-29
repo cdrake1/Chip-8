@@ -7,6 +7,7 @@
 //import hardware and memory
 import { hardware } from "./hardware";
 import { memory } from "./memory";
+import { monitor } from "./monitor";
 
 //cpu class -- child class of hardware
 export class cpu extends hardware{
@@ -24,9 +25,11 @@ export class cpu extends hardware{
         this.programCounter  = 0x200;
         this.stackPointer = 0x00;
         this.indexRegister = 0x0000;
+        
     }
 
     //Call and coordinate fetch, decode and execute
+    //SWITCH CASING WILL BE EXTREMELY REPETITIVE, BUT I WANT TO SHOW ALL 3 STEPS SEPERATELY
     public step()
     {
         //Fetch the opcode
@@ -45,140 +48,142 @@ export class cpu extends hardware{
     {return(memory[this.programCounter]);}//fetch
 
     //decode opcode
-    public decode(Inputopcode)
-    {return this.disassemble(Inputopcode);}//decode
-
-    //Execute the Instruction with 36 Switch Cases
-    public execute(Inputinstruction)
-    {
-
-    }//execute
+    public decode(inputOpcode)
+    {return this.disassemble(inputOpcode);}//decode
 
     //find instruction from opcode
     public disassemble(inputOpcode)
     {
+
+        
         const x = (inputOpcode & 0x0F00) >> 8; //determine x because it is a common reference among instructions
         const y = (inputOpcode & 0x00F0) >> 4; //determine y because it is a common reference among instructions
-
+        let inputInstruction = "null";
         switch(inputOpcode & 0xF000) //Were going to check for a match at the first digit
         {
         case 0x0000:
             switch(inputOpcode) //test for which of 0x0000 it is
             {
                 case 0x00E0:
-                    //CLR
+                    inputInstruction = "CLR";
                     break;
                 case 0x00EE:
-                    //RET
+                    inputInstruction = "RET";
                     break;
             }//switch
             break;
         case 0x1000:
-            //JP addr
+            inputInstruction = "JPaddr";
             break;
         case 0x2000:
-            //CALL addr
+            inputInstruction = "CALLaddr";
             break;
         case 0x3000:
-            //SE Vx, byte
+            inputInstruction ="SEVxbyte";
             break;
         case 0x4000:
-            //SNE Vx, byte
+            inputInstruction = "SNEVxbyte";
         case 0x5000:
-            //SE Vx, Vy
+            inputInstruction = "SEVxVy";
             break;
         case 0x6000:
-            //LD Vx, byte
+            inputInstruction= "LDVxbyte";
         case 0x7000:
-            // ADD Vx, byte
+            inputInstruction = "ADDVxbyte";
         case 0x8000:
             switch(inputOpcode & 0xF00F) //test for which of 0x8000 it is
                 {
                     case 0x8000:
-                        //LD Vx, Vy
+                        inputInstruction = "LDVxVy";
                         break;
                     case 0x8001:
-                        //OR Vx, Vy
+                        inputInstruction = "ORVxVy";
                         break;
                     case 0x8002:
-                        //AND Vx, Vy
+                        inputInstruction = "VxVy";
                         break;
                     case 0x8003:
-                        //XOR Vx, Vy
+                        inputInstruction = "XORVxVy";
                         break;
                     case 0x8004:
-                        //ADD Vx,Vy
+                        inputInstruction = "ADDVxVy";
                         break;
                     case 0x8005:
-                        //SUB Vx, Vy
+                        inputInstruction = "SUBVxVy";
                         break;
                     case 0x8006:
-                        //SHR Vx {, Vy}
+                        inputInstruction = "SHRVxVy";
                         break;
                     case 0x8007:
-                        //SUBN Vx, Vy
+                        inputInstruction = "SUBNVxVy";
                         break;
                     case 0x800E:
-                        //SHL Vx {, Vy}
+                        inputInstruction = "SHLVxVy";
                         break;
                     default:
                         throw new Error('BAD OPCODE');
                     }//switch
             break;
         case 0x9000:
-            //SNME Vx, Vy
+            inputInstruction = "SNMEVxVy";
             break;
         case 0xA000:
-            //LD I, addr
+            inputInstruction = "LDIaddr";
             break;
         case 0xB000:
-            //JP V0, addr
+            inputInstruction = "JPV0addr";
             break;
         case 0xC000:
-            //RND Vx, byte
+            inputInstruction = "RNDVxbyte";
             break;
         case 0xD000:
-            //DRW Vx, Vy, nibble
+            inputInstruction = "DRWVxVynibble";
         case 0xF000:
             switch(inputOpcode & 0xFF) // check last two digits
             {
                 case 0x9E:
-                    //SKP Vx
+                    inputInstruction = "SKPVx";
                     break;
                 case 0xA1:
-                    //SKNP Vx
+                    inputInstruction = "SKNPVx";
                     break;
                 case 0x07:
-                    //LD Vx, DT
+                    inputInstruction = "LDVxDT";
                     break;
                 case 0x0A:
-                    //LD Vx, K
+                    inputInstruction = "LDVxK";
                     break;
                 case 0x15:
-                    //LD DT, Vx
+                    inputInstruction = "LDDTVx";
                     break;
                 case 0x18:
-                    //LD ST, Vx
+                    inputInstruction = "LDSTVx";
                     break;
                 case 0x1E:
-                    //ADD I, Vx
+                    inputInstruction = "ADDIVx";
                     break;
                 case 0x29:
-                    //LD F, Vx
+                    inputInstruction = "LDFVx";
                     break;
                 case 0x33:
-                    //LD B, Vx
+                    inputInstruction = "LDBVx";
                     break;
                 case 0x55:
-                    //LD [I]. Vx
+                    inputInstruction = "LDIVx";
                 case 0x65:
-                    //LD Vx, [I]
+                    inputInstruction = "LDVxI";
                     break;
                 default:
                     throw new Error('BAD OPCODE!!');
             }//switch
               
         }//switch
+        return(inputInstruction);
+        }//disassemble
 
-    }//disassemble
+    //Execute the Instruction with 36 Switch Cases
+    public execute(inputInstruction)
+    {
+
+    }//execute
 }//cpu

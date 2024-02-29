@@ -16,7 +16,7 @@ export class memory extends hardware{
     constructor(id: number, name: string){
         super(id, name);    //pass memory to hardware
         this.generalMemory = new Uint8Array(4096);
-    }
+    }//constructor
 
     //loads ROM data into a buffer
     public ROMBuffer(filename: string){
@@ -25,7 +25,7 @@ export class memory extends hardware{
         //error checking
         if(!file){
             throw new Error("Something went wrong when trying to read the file " + filename);
-        }
+        }//if
 
         const buffer: number[] = [];
 
@@ -34,7 +34,7 @@ export class memory extends hardware{
         }
         this.Programsize = buffer.length;
         this.loadROM(buffer);
-    }
+    }//for
 
     //loads the buffer (ROM data) into memory
     public loadROM(ROMbuf: number[]){
@@ -45,10 +45,10 @@ export class memory extends hardware{
         //iterate through buf and add to mem
         for(let i = 0; i < ROMbuf.length; i++){
             this.generalMemory[startAddress + i] = ROMbuf[i];
-        }
+        }//for
 
         //this.test();
-    }
+    }//loadROM
 
     //dumps the memory
     public memDump(fromAddress: number){
@@ -57,10 +57,10 @@ export class memory extends hardware{
             this.hexlog(this.generalMemory[i], 4, i);
         }
         this.log("Memory Dump: complete");
-    }
+    }//memDump
 
     //program to test the memory
     private test(){
         this.memDump(0x200);
-    }
-}
+    }//test
+}//memory
