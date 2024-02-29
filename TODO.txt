@@ -1,17 +1,10 @@
 tdl
--focus on getting monitor to work 
-(its not function correctly - I have a function running in index.ts which isnt working. 
-Should be all black w two white dots at 0,0 and 5,2 but there is none
-ALSO in system.ts monitor isnt working idk how to declare it properly.
+-focus on getting monitor to work. (upd- Successfully created one monitor object and shared it to CPU) still broken
 
 to run the website, run the command **npm install -g http-server**, then cd into **web** and run http-server
 
-2 build out cpu - fetch decode execute
-switch is built, so must reference execute from witin each case and feed it instruction, execute will have another switch with executes instruction (or can combine switches if u feel like it idk yet)
-
-
-- build out and test mem
-- build out cpu and test
-- update read me
-- test c bat file
-- fix monitor and test
+1. build out and test mem
+2. build out cpu and test - decode is done working on execute
+3. test c bat file - file broken must run the file tsc line manually in /chip-8
+4. fix monitor and test
+5. update read me
