@@ -246,6 +246,13 @@ export class cpu extends hardware{
             case "XORVxVy":
                 break;
             case "ADDVxVy":
+//The values of Vx and Vy are added together. If the result is greater than 8 bits (i.e., > 255,) VF is set to 1, otherwise 0. 
+//Only the lowest 8 bits of the result are kept, and stored in Vx.
+                let sum = this.registers[x] += this.registers[y]
+                this.registers[0xF] = 0;
+                if(sum > 255)
+                    this.registers[0xF] = 1;
+                this.registers[x] = sum;
                 break;
             case "SUBVxVy":
                 break;
