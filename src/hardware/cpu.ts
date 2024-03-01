@@ -255,18 +255,35 @@ export class cpu extends hardware{
                 this.registers[x] = sum;
                 break;
             case "SUBVxVy":
+//If Vx > Vy, then VF is set to 1, otherwise 0. Then Vy is subtracted from Vx, and the results stored in Vx.
+                this.registers[0xF] = 0;
+                if(this.registers[x] > this.registers[y])
+                    this.registers[0xF] = 1;
+                this.registers[x] -= this.registers[y];
                 break;
             case "SHRVxVy":
                 break;
             case "SUBNVxVy":
+//If Vy > Vx, then VF is set to 1, otherwise 0. Then Vx is subtracted from Vy, and the results stored in Vx.
+                this.registers[0xF] = 0;
+                if(this.registers[y] > this.registers[x])
+                    this.registers[0xF] = 1;
+                this.registers[x] = this.registers[y] - this.registers[x];
                 break;
             case "SHLVxVy":
                 break;
-            case "SNMEVxVy":
+            case "SNEVxVy":
+//The values of Vx and Vy are compared, and if they are not equal, the program counter is increased by 2.
+                if(this.registers[x] != this.registers[y])
+                    this.programCounter + 2;
                 break;
             case "LDIaddr":
+//The value of register I is set to nnn
+                this.indexRegister = (inputOpcode & 0x0FFF);
                 break;
             case "JPV0addr":
+//The program counter is set to nnn plus the value of V0.
+                this.programCounter = (inputOpcode & 0x0FFF) + this.registers[0];
                 break;
             case "RNDVxbyte":
                 break;
