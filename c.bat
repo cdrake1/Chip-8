@@ -14,4 +14,4 @@ CALL tsc --version
 
 REM Compile TypeScript code
 ECHO Starting TypeScript compile
-tsc --rootDir src/ --outDir dist/
+CALL tsc --rootDir src/ --outDir dist/
