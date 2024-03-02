@@ -10,15 +10,16 @@ import { cpu } from "./cpu";
 
 //keyboard class - child class of hardware
 export class techmoKeyboard extends hardware{
-    keyboard: Uint8Array;
-    keymap: any; //!not sure how to initialize dictionary so went with any should work fine?
-    keysPressed: number[];
+    keyboard: boolean[];    //boolean array to show which keys are currently being pressed
+    keymap: any; //map of all the keys
+
     //keyboard constructor -- creates a keyboard and initializes its variables
     constructor(id: number, name: string){
         super(id, name);
-        this.keyboard = new Uint8Array(16);
+        this.keyboard = new Array(16);
+        this.initKeyboard();
         this.keymap = {
-                     //key - input (per Cowgod 2.3)
+            //key - input (per Cowgod 2.3)
             49: 0x1, // 1 - 1
             50: 0x2, // 2 - 2
             51: 0x3, // 3 - 3
@@ -37,6 +38,47 @@ export class techmoKeyboard extends hardware{
             86: 0xf // V - F
         }; //keymap
     }//constructor
+
+    //initializes all keyboard values to false
+    private initKeyboard(){
+        for(let i = 0; i < this.keyboard.length; i++){
+            this.keyboard[i] = false;
+        }
+
+        //true == pressed
+        //false == not pressed
+    }
+
+    private monitorKeys() {
+        /*
+            character stream from stdin code (most of the contents of this function) taken from here
+            https://stackoverflow.com/questions/5006821/nodejs-how-to-read-keystrokes-from-stdin
+            This takes care of the simulation we need to do to capture stdin from the console and retrieve the character.
+            Then we can put it in keyspressed
+         */
+        var stdin = process.stdin;
+        stdin.setRawMode( true ); //without this, we would only get streams once enter is pressed
+        stdin.resume();
+        stdin.setEncoding(null);
+
+        stdin.on( 'data', function( key ){
+            let keyPressed = key.toString();    //turn key pressed to string
+
+            //check if that key is within the map
+            if(this.keymap.has(keyPressed)){
+                let pressed = this.keymap.get(keyPressed);
+            }
+            // this let's us break out with ctrl-c
+            if ( key.toString() === '\u0003' ) {
+                process.exit();
+            }
+        }.bind(this));
+    }
+
+    //is a certain key pressed?
+    public isKeyPressed(key: number): boolean{
+        return this.keyboard[key];  //returns key status
+    }
        
     
 }//techmoKeyboard
