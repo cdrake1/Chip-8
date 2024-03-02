@@ -10,8 +10,8 @@ if not exist "dist" (
 )
 
 REM TypeScript version
-tsc --version
+CALL tsc --version
 
 REM Compile TypeScript code
 ECHO Starting TypeScript compile
-CALL tsc --rootDir src/ --outDir dist/
+tsc --rootDir src/ --outDir dist/
