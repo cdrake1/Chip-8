@@ -37,8 +37,14 @@ To create an environment for this project we are going to need a few things:
 3. Finally run the following commands separately to verify the success of your installation: **node --version** & **npm --version**
 
 ## Starting The System!
+
+### Mac & Linux
 1. Compile TypeScript into JavaScript by running the bash script file **'c.sh'**. If you run into an error trying to run this you most likely need to give the file executive permissions... **"chmod +x c.sh"**
 2. run the command **"npm start"** in terminal
+
+### Windows
+1. Compile TypeScript into JavaScript by running the batch script file **'c.bat'**. If you run into an error trying to run this you most likely are running it in Powershell. Please navigate to command prompt to execute the script file. If that still doesn't work then simply run the command "MKDIR dist" and "CALL tsc --rootDir src/ --outDir dist/" individually.
+2. run the command **"npm start"**
 
 ## Other Resources
 [taniarascia](https://github.com/taniarascia/chip8/blob/master/classes/RomBuffer.js)
