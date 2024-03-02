@@ -22,7 +22,7 @@ export class System extends hardware {
     //system constructor -- creates the system and instances of hardware(cpu, mem)
     constructor(id: number, name: string) {
         super(id, name); //pass system to hardware constructor
-        this._cpu = new cpu(0, "CPU"/*,this._monitor*/); //create new cpu hardware
+        this._cpu = new cpu(0, "CPU"/*,this._monitor,this._keyboard*/); //create new cpu hardware
         this._mem = new memory(0, "RAM"); //create new memory hardware
         this._keyboard = new techmoKeyboard(0, "Keyboard"); //creates new keyboard hardware
         //this._monitor = new monitor(0,"Monitor",document.getElementById('screen') as HTMLCanvasElement);

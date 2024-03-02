@@ -7,4 +7,6 @@ const name1: string = "monitor1";
 //Create our monitor
 
 
-mainMonitor.paintCanvas();
+//mainMonitor.paintCanvas();
+
+//Need cycle function could be here or in system (must keep track of elapsed time since program start and use an fps to call cpu.step())
