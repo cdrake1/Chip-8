@@ -6,7 +6,6 @@
 
 //import hardware
 import { hardware } from "./hardware";
-import { cpu } from "./cpu";
 
 //keyboard class - child class of hardware
 export class techmoKeyboard extends hardware{
@@ -61,17 +60,27 @@ export class techmoKeyboard extends hardware{
         stdin.resume();
         stdin.setEncoding(null);
 
-        stdin.on( 'data', function( key ){
+        //key down
+        stdin.on( 'keydown', function( key ){
             let keyPressed = key.toString();    //turn key pressed to string
 
             //check if that key is within the map
             if(this.keymap.has(keyPressed)){
-                let pressed = this.keymap.get(keyPressed);
+                let pressedKey = this.keymap.get(keyPressed);
+                this.keyboard[pressedKey] = true;
             }
-            // this let's us break out with ctrl-c
+
+            //this let's us break out with ctrl-c
             if ( key.toString() === '\u0003' ) {
                 process.exit();
             }
+
+            //key release
+            stdin.on('keyup', (key) => {
+                let releasedKey = this.keymap.get(key.toString());
+                this.keyboard[releasedKey] = false; //set key as released
+            });
+
         }.bind(this));
     }
 
