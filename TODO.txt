@@ -1,5 +1,5 @@
 TODO
-1. Need default sprites to exist in memory and a function to load them. refer to Cowgod 2.4 for list
+1. Need default sprites to exist in memory and a function to load them. refer to Cowgod 2.4 for list [DONE]
 
 2. keyboard needs to be built out (I already inputted the basic key layout) It needs functions to operate
 
