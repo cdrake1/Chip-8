@@ -9,23 +9,23 @@ import { cpu } from "./hardware/cpu";
 import { hardware } from "./hardware/hardware";
 import { memory } from "./hardware/memory";
 import { techmoKeyboard } from "./hardware/techmoKeyboard";
-import { monitor } from "./hardware/monitor";
+//import { monitor } from "./hardware/monitor";
 
 //system class -- child class of hardware
 export class System extends hardware {
     private _cpu : cpu; //create cpu
     private _mem : memory; //create memory
     private _keyboard : techmoKeyboard; //creates keyboard
-    private _monitor : monitor;
+    //private _monitor : monitor;
     public running: boolean; //is the system on?
 
     //system constructor -- creates the system and instances of hardware(cpu, mem)
     constructor(id: number, name: string) {
         super(id, name); //pass system to hardware constructor
-        this._cpu = new cpu(0, "CPU",this._monitor); //create new cpu hardware
+        this._cpu = new cpu(0, "CPU"/*,this._monitor*/); //create new cpu hardware
         this._mem = new memory(0, "RAM"); //create new memory hardware
         this._keyboard = new techmoKeyboard(0, "Keyboard"); //creates new keyboard hardware
-        this._monitor = new monitor(0,"Monitor",document.getElementById('screen') as HTMLCanvasElement);
+        //this._monitor = new monitor(0,"Monitor",document.getElementById('screen') as HTMLCanvasElement);
         this.running  = false;
         this.startSystem(); //start the system(press the power button)
     }

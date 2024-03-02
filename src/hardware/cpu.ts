@@ -7,7 +7,7 @@
 //import hardware and memory
 import { hardware } from "./hardware";
 import { memory } from "./memory";
-import { monitor } from "./monitor";
+//import { monitor } from "./monitor";
 
 //cpu class -- child class of hardware
 export class cpu extends hardware{
@@ -16,17 +16,17 @@ export class cpu extends hardware{
     programCounter: number; //16-bit program counter -- holds address of next instruction
     stackPointer: number;   //8-bit int that points to location within the stack
     indexRegister: number;  //16-bit memory address pointer
-    _monitor: monitor; //Monitor instance
+   //_monitor: monitor; //Monitor instance
 
     //cpu constructor -- creates the cpu and initializes its variables
-    constructor(id: number, name: string,_monitor: monitor) {
+    constructor(id: number, name: string/*,_monitor: monitor*/) {
         super(id, name);    //passes cpu to hardware
         this.registers = new Uint8Array(16);
         this.stack  = new Uint8Array(16);
         this.programCounter  = 0x200;
         this.stackPointer = 0x00;
         this.indexRegister = 0x0000;
-        this._monitor = _monitor;
+        //this._monitor = _monitor;
         
     }
 
@@ -188,7 +188,7 @@ export class cpu extends hardware{
         {
             case "CLR":
 //clears display
-                this._monitor.clear();
+                //this._monitor.clear();
                 break;
             case "RET":
 //The interpreter sets the program counter to top of stack then subtracts 1 from the stack pointer
