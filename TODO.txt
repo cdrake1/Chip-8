@@ -1,17 +1,14 @@
 TODO
-1. Need default sprites to exist in memory and a function to load them. refer to Cowgod 2.4 for list [DONE]
 
-2. keyboard needs to be built out (I already inputted the basic key layout) It needs functions to operate [Done but need to test]
+6. speaker needs to be made [started]
 
-3. CPU MOSTLY DONE. Need help with three instructions which rely on the keyboard. (marked them) [done?]
-
-4. Find a way to run a local server for testing (maybe using npm express?)
-
-5. read note at the bottom of index.ts
-
-6. speaker needs to be made
+9. figure out how to host/run code through a browser
 
 7. monitor needs to be fixed
+
+8. keyboard needs to be fixed
+
+9. test
 
 
 ------IMPORTANT--------
