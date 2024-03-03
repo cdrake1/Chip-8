@@ -1,10 +1,22 @@
-tdl
--focus on getting monitor to work. (upd- Successfully created one monitor object and shared it to CPU) still broken
+TODO
+1. Need default sprites to exist in memory and a function to load them. refer to Cowgod 2.4 for list [DONE]
 
-to run the website, run the command **npm install -g http-server**, then cd into **web** and run http-server
+2. keyboard needs to be built out (I already inputted the basic key layout) It needs functions to operate [Done but need to test]
 
-1. build out and test mem
-2. build out cpu and test - decode is done working on execute
-3. test c bat file - file broken must run the file tsc line manually in /chip-8
-4. fix monitor and test
-5. update read me
+3. CPU MOSTLY DONE. Need help with three instructions which rely on the keyboard. (marked them) [done?]
+
+4. Find a way to run a local server for testing (maybe using npm express?)
+
+5. read note at the bottom of index.ts
+
+6. speaker needs to be made
+
+7. monitor needs to be fixed
+
+
+------IMPORTANT--------
+
+It looks like the reason we are getting errors for the monitor and now the keyboard is because 
+objects like document and window are used for browser based code while node.js is a server side langauge environment that
+doesnt contain these in its language. So running npm start will casue these errors to throw. We need to find a way to run this code in the web browser
+see here: https://stackoverflow.com/questions/45964178/referenceerror-window-is-not-defined-at-object-anonymous-node-js 

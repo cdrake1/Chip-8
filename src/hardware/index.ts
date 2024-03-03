@@ -2,9 +2,8 @@
 
 //import monitor
 import { monitor } from "./monitor";
-const name1: string = "monitor1";
 
-//Create our monitor
+//create our monitor
+const _monitor = new monitor(0,"Monitor");
 
-
-mainMonitor.paintCanvas();
+_monitor.paintCanvas();

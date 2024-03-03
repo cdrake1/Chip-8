@@ -17,7 +17,7 @@ export class monitor extends hardware {
     canvasCtx: CanvasRenderingContext2D; // Define canvasCtx to hold the 2D context
 
     //constructor
-    constructor(id: number, name: string, canvas: HTMLCanvasElement) {
+    constructor(id: number, name: string) {
         super(id, name); //passes monitor to hardware
 
         // CHIP-8 has a 64x32 pixel display
@@ -35,7 +35,7 @@ export class monitor extends hardware {
          }
 
         // create canvas for html with the correct size and scale
-        this.canvas = canvas;
+        this.canvas = document.createElement('canvas');
         this.canvas.width = this.cols * this.scale;
         this.canvas.height = this.rows * this.scale;
 
