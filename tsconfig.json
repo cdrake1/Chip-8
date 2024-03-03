@@ -9,9 +9,7 @@
     "lib": ["ES2017", "DOM"]
   },
   "include": [
-    "src/**/*",
-    "dist/hardware/monitor.js",
-    "dist/hardware/hardware.js"
+    "src/"
   ],
   "exclude": [
     "./node_modules"
