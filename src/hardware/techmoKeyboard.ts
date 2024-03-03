@@ -36,6 +36,10 @@ export class techmoKeyboard extends hardware{
             67: 0xb, // C - B
             86: 0xf // V - F
         }; //keymap
+
+        //event listeners that handle keyboard input -- browser
+        window.addEventListener('keydown', this.keyDown.bind(this), false);
+        window.addEventListener('keyup', this.keyUp.bind(this), false);
     }//constructor
 
     //initializes all keyboard values to false
@@ -48,46 +52,22 @@ export class techmoKeyboard extends hardware{
         //false == not pressed
     }
 
-    private monitorKeys() {
-        /*
-            character stream from stdin code (most of the contents of this function) taken from here
-            https://stackoverflow.com/questions/5006821/nodejs-how-to-read-keystrokes-from-stdin
-            This takes care of the simulation we need to do to capture stdin from the console and retrieve the character.
-            Then we can put it in keyspressed
-         */
-        var stdin = process.stdin;
-        stdin.setRawMode( true ); //without this, we would only get streams once enter is pressed
-        stdin.resume();
-        stdin.setEncoding(null);
+    //event listener -- looks to see if keys are up
+    keyUp(event){
+        let keyPressed: number = this.keymap[event.key];
+        this.keyboard[keyPressed] = false;
 
-        //key down
-        stdin.on( 'keydown', function( key ){
-            let keyPressed = key.toString();    //turn key pressed to string
-
-            //check if that key is within the map
-            if(this.keymap.has(keyPressed)){
-                let pressedKey = this.keymap.get(keyPressed);
-                this.keyboard[pressedKey] = true;
-            }
-
-            //this let's us break out with ctrl-c
-            if ( key.toString() === '\u0003' ) {
-                process.exit();
-            }
-
-            //key release
-            stdin.on('keyup', (key) => {
-                let releasedKey = this.keymap.get(key.toString());
-                this.keyboard[releasedKey] = false; //set key as released
-            });
-
-        }.bind(this));
+        // dow we need code for next key press?
     }
 
+    //event listener -- looks to see if keys are being pushed down
+    keyDown(event){
+        let keyPressed: number = this.keymap[event.key];
+        this.keyboard[keyPressed] = true;
+    }
+    
     //is a certain key pressed?
     public isKeyPressed(key: number): boolean{
         return this.keyboard[key];  //returns key status
     }
-       
-    
 }//techmoKeyboard
