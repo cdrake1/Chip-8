@@ -12,3 +12,11 @@ TODO
 6. speaker needs to be made
 
 7. monitor needs to be fixed
+
+
+------IMPORTANT--------
+
+It looks like the reason we are getting errors for the monitor and now the keyboard is because 
+objects like document and window are used for browser based code while node.js is a server side langauge environment that
+doesnt contain these in its language. So running npm start will casue these errors to throw. We need to find a way to run this code in the web browser
+see here: https://stackoverflow.com/questions/45964178/referenceerror-window-is-not-defined-at-object-anonymous-node-js 
