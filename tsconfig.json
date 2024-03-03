@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
-    "target"              : "ES2017",
-    "module"              : "commonjs",
-    "rootDir"             : "src",
-    "outDir"              : "dist",
-    "sourceMap"           : true,
-    "extendedDiagnostics" : true
+    "target": "ES2017",
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "dist",
+    "sourceMap": true,
+    "extendedDiagnostics": true,
+    "lib": ["ES2017", "DOM"]
   },
-
   "include": [
-      "src/**/*"
-, "dist/hardware/monitor.js", "dist/hardware/hardware.js"  ],
+    "src/**/*",
+    "dist/hardware/monitor.js",
+    "dist/hardware/hardware.js"
+  ],
   "exclude": [
     "./node_modules"
   ]

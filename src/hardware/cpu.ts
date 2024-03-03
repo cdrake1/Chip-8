@@ -27,7 +27,7 @@ export class cpu extends hardware{
     
 
     //cpu constructor -- creates the cpu and initializes its variables
-    constructor(id: number, name: string,_monitor: monitor,_memory,_keyboard) {
+    constructor(id: number, name: string, _monitor: monitor,_keyboard: techmoKeyboard) {
         super(id, name);    //passes cpu to hardware
         this.registers = new Uint8Array(16);
         this.stack  = new Uint8Array(16);
@@ -39,7 +39,6 @@ export class cpu extends hardware{
         this.cpuSpeed = 10;
         this.paused = false;
         this._monitor = _monitor;
-        this._memory = _memory;
         this._keyboard = _keyboard;
         
     }
