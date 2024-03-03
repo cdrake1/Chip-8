@@ -14,6 +14,6 @@ export class clock extends hardware{
     cycle(){ //calls step every second
         setInterval( () => {
             this._cpu.step();
-        }, 1000)
+        }, 1000/60)
     }
 }
