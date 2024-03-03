@@ -224,22 +224,22 @@ export class cpu extends hardware{
         switch(inputInstruction)
         {
             case "CLR":
-//clears display
+            //clears display
                 this._monitor.clear();
                 break;
             case "RET":
-//The interpreter sets the program counter to top of stack then subtracts 1 from the stack pointer
+            //The interpreter sets the program counter to top of stack then subtracts 1 from the stack pointer
                 this.programCounter = this.stack[this.stackPointer];
                 this.stack[this.stackPointer] = 0; //may not be needed
                 this.stackPointer--; 
                 break;
             case "JPaddr":
-//The interpreter sets the program counter to nnn.
+            //The interpreter sets the program counter to nnn.
                 this.programCounter = (inputOpcode & 0x0FFF);
                 break;
             case "CALLaddr":
-//The interpreter increments the stack pointer, then puts the current PC on the top of the stack.
-//Then the PC is then set to nnn.
+            //The interpreter increments the stack pointer, then puts the current PC on the top of the stack.
+            //Then the PC is then set to nnn.
                 if (this.stackPointer < 15) { //not overflowed
                     this.stack[this.stackPointer++] = (this.programCounter >> 8) & 0xFF; // Push high byte
                     this.stack[this.stackPointer++] = this.programCounter & 0xFF; // Push low byte
@@ -250,50 +250,50 @@ export class cpu extends hardware{
                 this.programCounter = (inputOpcode & 0x0FFF);
                 break;
             case "SEVxbyte":
-//The interpreter compares register Vx to kk, and if they are equal, increments the program counter by 2.
+            //The interpreter compares register Vx to kk, and if they are equal, increments the program counter by 2.
                 if(this.registers[x] == (inputOpcode && 0x00FF))
                     this.programCounter += 2;
                 break;
             case "SNEVxbyte":
-//The interpreter compares register Vx to kk, and if they are not equal, increments the program counter by 2.
+            //The interpreter compares register Vx to kk, and if they are not equal, increments the program counter by 2.
                 if(this.registers[x] != (inputOpcode && 0x00FF))
                     this.programCounter += 2;
                 break;
             case "SEVxVy":
-//The interpreter compares register Vx to register Vy, and if they are equal, increments the program counter by 2.
+            //The interpreter compares register Vx to register Vy, and if they are equal, increments the program counter by 2.
                 if(this.registers[x] == this.registers[y])
                     this.programCounter += 2;
                 break;
             case "LDVxbyte":
-//The interpreter puts the value kk into register Vx.
+            //The interpreter puts the value kk into register Vx.
                 this.registers[x] = (inputOpcode & 0xFF);
                 break;
             case "ADDVxbyte":
-//Adds the value kk to the value of register Vx, then stores the result in Vx.
+            //Adds the value kk to the value of register Vx, then stores the result in Vx.
                 this.registers[x] += (inputOpcode & 0xFF);
                 break;
             case "LDVxVy":
-//Stores the value of register Vy in register Vx.
+            //Stores the value of register Vy in register Vx.
                 this.registers[x] = this.registers[y]
                 break;
             case "ORVxVy":
-//Performs a bitwise OR on the values of Vx and Vy, then stores the result in Vx. 
-//A bitwise OR compares the corresponding bits from two values, and if either bit is 1, then the same bit in the result is also 1. Otherwise, it is 0.
+            //Performs a bitwise OR on the values of Vx and Vy, then stores the result in Vx. 
+            //A bitwise OR compares the corresponding bits from two values, and if either bit is 1, then the same bit in the result is also 1. Otherwise, it is 0.
                 this.registers[x] |= this.registers[y];   
                 break;
             case "ANDVxVy":
-//Performs a bitwise AND on the values of Vx and Vy, then stores the result in Vx.
-//A bitwise AND compares the corrseponding bits from two values, and if both bits are 1, then the same bit in the result is also 1. Otherwise, it is 0.
+            //Performs a bitwise AND on the values of Vx and Vy, then stores the result in Vx.
+            //A bitwise AND compares the corrseponding bits from two values, and if both bits are 1, then the same bit in the result is also 1. Otherwise, it is 0.
                 this.registers[x] &= this.registers[y];  
                 break;
             case "XORVxVy":
-//Performs a bitwise exclusive OR on the values of Vx and Vy, then stores the result in Vx. 
-//An exclusive OR compares the corrseponding bits from two values, and if the bits are not both the same, then the corresponding bit in the result is set to 1. Otherwise, it is 0.
+            //Performs a bitwise exclusive OR on the values of Vx and Vy, then stores the result in Vx. 
+            //An exclusive OR compares the corrseponding bits from two values, and if the bits are not both the same, then the corresponding bit in the result is set to 1. Otherwise, it is 0.
                 this.registers[x] ^= this.registers[y];  
                 break;
             case "ADDVxVy":
-//The values of Vx and Vy are added together. If the result is greater than 8 bits (i.e., > 255,) VF is set to 1, otherwise 0. 
-//Only the lowest 8 bits of the result are kept, and stored in Vx.
+            //The values of Vx and Vy are added together. If the result is greater than 8 bits (i.e., > 255,) VF is set to 1, otherwise 0. 
+            //Only the lowest 8 bits of the result are kept, and stored in Vx.
                 let sum = this.registers[x] += this.registers[y]
                 this.registers[0xF] = 0;
                 if(sum > 255)
@@ -301,54 +301,54 @@ export class cpu extends hardware{
                 this.registers[x] = sum;
                 break;
             case "SUBVxVy":
-//If Vx > Vy, then VF is set to 1, otherwise 0. Then Vy is subtracted from Vx, and the results stored in Vx.
+            //If Vx > Vy, then VF is set to 1, otherwise 0. Then Vy is subtracted from Vx, and the results stored in Vx.
                 this.registers[0xF] = 0;
                 if(this.registers[x] > this.registers[y])
                     this.registers[0xF] = 1;
                 this.registers[x] -= this.registers[y];
                 break;
             case "SHRVxVy":
-//If the least-significant bit of Vx is 1, then VF is set to 1, otherwise 0. Then Vx is divided by 2.
+            //If the least-significant bit of Vx is 1, then VF is set to 1, otherwise 0. Then Vx is divided by 2.
                 this.registers[0xF] = 0;
                 if((this.registers[x] & 0xF) == 1)
                     this.registers[0xF] = 1;
                 this.registers[x] /= 2;
                 break;
             case "SUBNVxVy":
-//If Vy > Vx, then VF is set to 1, otherwise 0. Then Vx is subtracted from Vy, and the results stored in Vx.
+            //If Vy > Vx, then VF is set to 1, otherwise 0. Then Vx is subtracted from Vy, and the results stored in Vx.
                 this.registers[0xF] = 0;
                 if(this.registers[y] > this.registers[x])
                     this.registers[0xF] = 1;
                 this.registers[x] = this.registers[y] - this.registers[x];
                 break;
             case "SHLVxVy":
-//If the most-significant bit of Vx is 1, then VF is set to 1, otherwise to 0. Then Vx is multiplied by 2.
+            //If the most-significant bit of Vx is 1, then VF is set to 1, otherwise to 0. Then Vx is multiplied by 2.
                 this.registers[0xF] = 0;
                 if ((this.registers[x] & 0x80) != 0)
                     this.registers[0xF] = 1;
                 this.registers[x] *= 2;
                 break;
             case "SNEVxVy":
-//The values of Vx and Vy are compared, and if they are not equal, the program counter is increased by 2.
+            //The values of Vx and Vy are compared, and if they are not equal, the program counter is increased by 2.
                 if(this.registers[x] != this.registers[y])
                     this.programCounter + 2;
                 break;
             case "LDIaddr":
-//The value of register I is set to nnn
+            //The value of register I is set to nnn
                 this.indexRegister = (inputOpcode & 0x0FFF);
                 break;
             case "JPV0addr":
-//The program counter is set to nnn plus the value of V0.
+            //The program counter is set to nnn plus the value of V0.
                 this.programCounter = (inputOpcode & 0x0FFF) + this.registers[0];
                 break;
             case "RNDVxbyte":
-//The interpreter generates a random number from 0 to 255, which is then ANDed with the value kk. The results are stored in Vx. See instruction 8xy2 for more information on AND.
+            //The interpreter generates a random number from 0 to 255, which is then ANDed with the value kk. The results are stored in Vx. See instruction 8xy2 for more information on AND.
                 let randomNum = Math.floor(Math.random() * 0xFF)
                 this.registers[x] = (randomNum & (inputOpcode & 0xFF));
                 break;
             case "DRWVxVynibble":
-//The interpreter reads n bytes from memory, starting at the address stored in I. These bytes are then displayed as sprites on screen at coordinates (Vx, Vy). Sprites are XORed onto the existing screen. 
-//If this causes any pixels to be erased, VF is set to 1, otherwise it is set to 0. If the sprite is positioned so part of it is outside the coordinates of the display, it wraps around to the opposite side of the screen.
+            //The interpreter reads n bytes from memory, starting at the address stored in I. These bytes are then displayed as sprites on screen at coordinates (Vx, Vy). Sprites are XORed onto the existing screen. 
+            //If this causes any pixels to be erased, VF is set to 1, otherwise it is set to 0. If the sprite is positioned so part of it is outside the coordinates of the display, it wraps around to the opposite side of the screen.
                 let width = 8; //8 bits in sprite (ex: 11110000) for each row
                 let height = (inputOpcode & 0xF); //take nibble and iterate through loop 
 
@@ -368,55 +368,55 @@ export class cpu extends hardware{
                 }//for
                 break;
             case "SKPVx":
-//!Checks the keyboard, and if the key corresponding to the value of Vx is currently in the down position, PC is increased by 2.
-//Mostly done just need this function \/\/\/\/ to be made
+            //!Checks the keyboard, and if the key corresponding to the value of Vx is currently in the down position, PC is increased by 2.
+            //Mostly done just need this function \/\/\/\/ to be made
                 if(this._keyboard.isKeyPressed(this.registers[x]) == true)
                     this.programCounter += 2;
                 break;
             case "SKNPVx":
-//!Checks the keyboard, and if the key corresponding to the value of Vx is currently in the up position, PC is increased by 2.
-//Mostly done just need this function \/\/\/\/ to be made
+            //!Checks the keyboard, and if the key corresponding to the value of Vx is currently in the up position, PC is increased by 2.
+            //Mostly done just need this function \/\/\/\/ to be made
                 if(this._keyboard.isKeyPressed(this.registers[x]) == false)
                 this.programCounter += 2;
                 break;
             case "LDVxDT":
-//The value of DT is placed into Vx.
+            //The value of DT is placed into Vx.
                 this.registers[x] = this.delayTimer;
                 break;
             case "LDVxK":
-//!All execution stops until a key is pressed, then the value of that key is stored in Vx.
-//Need this instruction to be built \/\/\/
+            //!All execution stops until a key is pressed, then the value of that key is stored in Vx.
+            //Need this instruction to be built \/\/\/
 
 
 
                 break;
             case "LDDTVx":
-//DT is set equal to the value of Vx.
+            //DT is set equal to the value of Vx.
                 this.delayTimer = this.registers[x];
                 break;
             case "LDSTVx":
-//ST is set equal to the value of Vx.
+            //ST is set equal to the value of Vx.
                 this.soundTimer = this.registers[x];
                 break;
             case "ADDIVx":
-//The values of I and Vx are added, and the results are stored in I.
+            //The values of I and Vx are added, and the results are stored in I.
                 this.indexRegister += this.registers[x];
                 break;
             case "LDFVx":
-//The value of I is set to the location for the hexadecimal sprite corresponding to the value of Vx.
+            //The value of I is set to the location for the hexadecimal sprite corresponding to the value of Vx.
                 this.registers[x] = this.indexRegister;
                 break;
             case "LDBVx":
-//!The interpreter takes the decimal value of Vx, and places the hundreds digit in memory at location in I, the tens digit at location I+1, and the ones digit at location I+2.
+            //!The interpreter takes the decimal value of Vx, and places the hundreds digit in memory at location in I, the tens digit at location I+1, and the ones digit at location I+2.
 
                 break;
             case "LDIVx":
-//The interpreter copies the values of registers V0 through Vx into memory, starting at the address in I.
+            //The interpreter copies the values of registers V0 through Vx into memory, starting at the address in I.
                 for(let i = 0;i <= x;i++)
                     this._memory[this.indexRegister + i] = this.registers[i];
                 break;
             case "LDVxI":
-//The interpreter reads values from memory starting at location I into registers V0 through Vx.
+            //The interpreter reads values from memory starting at location I into registers V0 through Vx.
                     for(let i = 0;i <= x;i++)
                     this.registers[i] = this._memory[this.indexRegister + i];
                 break;
