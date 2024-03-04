@@ -1,12 +1,12 @@
 TODO
 
-6. speaker needs to be made [started]
+6. speaker needs to be made [added comment in speaker and added sound function in cpu]
 
-9. figure out how to host/run code through a browser
+9. figure out how to host/run code through a browser (node's express could work?)
 
 7. monitor needs to be fixed
 
-8. keyboard needs to be fixed
+8. keyboard needs to be fixed [Missing a function to finish cpu instructions -> see keyboard note]
 
 9. test
 

@@ -70,4 +70,8 @@ export class techmoKeyboard extends hardware{
     public isKeyPressed(key: number): boolean{
         return this.keyboard[key];  //returns key status
     }
+
+
+    //Missing a function (see note line 402 in cpu)
+
 }//techmoKeyboard

@@ -11,6 +11,7 @@ export class speaker extends hardware{
         */
     }
 
+    //Functions needed - one to start sound and one to stop the sound)
     public play(){}
     public stop(){}
 }
