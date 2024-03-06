@@ -48,5 +48,5 @@ To create an environment for this project we are going to need a few things:
 
 ## Other Resources
 [taniarascia](https://github.com/taniarascia/chip8/blob/master/classes/RomBuffer.js)
-[freecodecampe](https://www.freecodecamp.org/news/creating-your-very-own-chip-8-emulator/#:~:text=One%20of%20the%20simplest%20ways,%2C%20more%20in%2Ddepth%20emulators.)
+[freecodecamp](https://www.freecodecamp.org/news/creating-your-very-own-chip-8-emulator/#:~:text=One%20of%20the%20simplest%20ways,%2C%20more%20in%2Ddepth%20emulators.)
 [devernay](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#2.2)
