@@ -15,6 +15,10 @@ tsc --version
 echo "Starting TypeScript compile"
 tsc --rootDir src/ --outDir dist/
 
-#run webpack to bundle JavaScript files
-echo "Starting webpack"
-webpack --config webpack.config.js
+#build bundle javascript file
+echo "Building bundle"
+browserify "./dist/system.js" -o "bundle.js"
+
+#run express server
+echo "Starting Express server"
+node server.js
