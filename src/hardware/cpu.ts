@@ -8,8 +8,8 @@
 import { hardware } from "./hardware";
 import { memory } from "./memory";
 import { monitor } from "./monitor";
-import { techmoKeyboard } from "./techmoKeyboard";
 import { speaker } from "./speaker";
+import { techmoKeyboard } from "./techmoKeyboard";
 
 //cpu class -- child class of hardware
 export class cpu extends hardware{
@@ -25,11 +25,10 @@ export class cpu extends hardware{
     _monitor: monitor; //Monitor instance
     _memory: memory;
     _keyboard: techmoKeyboard;
-    _speaker: speaker;
     
 
     //cpu constructor -- creates the cpu and initializes its variables
-    constructor(id: number, name: string, _monitor: monitor,_keyboard: techmoKeyboard,_speaker: speaker) {
+    constructor(id: number, name: string, _monitor: monitor,_keyboard: techmoKeyboard, _speaker: speaker) {
         super(id, name);    //passes cpu to hardware
         this.registers = new Uint8Array(16);
         this.stack  = new Uint8Array(16);
@@ -42,7 +41,6 @@ export class cpu extends hardware{
         this.paused = false;
         this._monitor = _monitor;
         this._keyboard = _keyboard;
-        this._speaker = _speaker;
         
     }
 
@@ -71,18 +69,9 @@ export class cpu extends hardware{
         //every step we update canvas, timers and play a sound
         if(this.paused != true)
             this.updateTimers();
-        this.sound();
+        //playsoundhere ->
         this._monitor.paintCanvas();
     }//step
-
-    //Function for overall updating of sound
-    sound()
-    {
-        if(this.soundTimer > 0)
-            this._speaker.play();
-        else
-            this._speaker.stop();
-    }//sound
   
     //Get address from memory
     fetch()
@@ -380,13 +369,13 @@ export class cpu extends hardware{
                 }//for
                 break;
             case "SKPVx":
-            //!Checks the keyboard, and if the key corresponding to the value of Vx is currently in the down position, PC is increased by 2.
+            //Checks the keyboard, and if the key corresponding to the value of Vx is currently in the down position, PC is increased by 2.
             //Mostly done just need this function \/\/\/\/ to be made
                 if(this._keyboard.isKeyPressed(this.registers[x]) == true)
                     this.programCounter += 2;
                 break;
             case "SKNPVx":
-            //!Checks the keyboard, and if the key corresponding to the value of Vx is currently in the up position, PC is increased by 2.
+            //Checks the keyboard, and if the key corresponding to the value of Vx is currently in the up position, PC is increased by 2.
             //Mostly done just need this function \/\/\/\/ to be made
                 if(this._keyboard.isKeyPressed(this.registers[x]) == false)
                 this.programCounter += 2;
@@ -397,9 +386,8 @@ export class cpu extends hardware{
                 break;
             case "LDVxK":
             //!All execution stops until a key is pressed, then the value of that key is stored in Vx.
-                this.paused = true;
+            //Need this instruction to be built \/\/\/
 
-                //Missing some function here to wait for any key to be pressed
 
 
                 break;

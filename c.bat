@@ -15,3 +15,7 @@ CALL tsc --version
 REM Compile TypeScript code
 ECHO Starting TypeScript compile
 CALL tsc --rootDir src/ --outDir dist/
+
+REM webpack to bundle JavaScript files
+echo "Starting webpack"
+CALL browserify C:\Users\Christian\Documents\GitHub\Chip-8\dist\system.js -o bundle.js REM maybe works

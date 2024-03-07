@@ -52,35 +52,28 @@ export class memory extends hardware{
     }
 
     //loads ROM data into a buffer
-    public ROMBuffer(filename: string){
-        const file = fs.readFileSync(filename);
-
-        //error checking
-        if(!file){
-            throw new Error("Something went wrong when trying to read the file " + filename);
+    public async ROMBuffer(url: string) {
+        try {
+            const response = await fetch(url);
+            const buffer = await response.arrayBuffer();
+            const ROMbuf = new Uint8Array(buffer);
+            this.Programsize = ROMbuf.length;
+            this.loadROM(ROMbuf);
+        } catch (error) {
+            console.error("Error loading ROM:", error);
         }
-
-        const buffer: number[] = [];
-
-        for(let i = 0; i < file.length; ++i){
-            buffer.push(file[i]);
-        }
-        this.Programsize = buffer.length;
-        this.loadROM(buffer);
     }
+    
 
-    //loads the buffer (ROM data) into memory
-    public loadROM(ROMbuf: number[]){
-
-        //Chip-8 programs start at location 0x200
+    // loads the buffer (ROM data) into memory
+    public loadROM(ROMbuf: Uint8Array) {
+        // Chip-8 programs start at location 0x200
         const startAddress: number = 0x200;
 
-        //iterate through buf and add to mem
-        for(let i = 0; i < ROMbuf.length; i++){
+        // iterate through buf and add to mem
+        for (let i = 0; i < ROMbuf.length; i++) {
             this.generalMemory[startAddress + i] = ROMbuf[i];
         }
-
-        //this.test();
     }
 
     //dumps the memory

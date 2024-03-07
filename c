@@ -14,3 +14,7 @@ tsc --version
 #compile TS code
 echo "Starting TypeScript compile"
 tsc --rootDir src/ --outDir dist/
+
+#run webpack to bundle JavaScript files
+echo "Starting webpack"
+webpack --config webpack.config.js
