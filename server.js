@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 3000;
 //static files
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'web')));
+app.use('/roms', express.static(path.join(__dirname, 'roms')));
+
 
 //route for server
 app.get('/', (req, res) => {
