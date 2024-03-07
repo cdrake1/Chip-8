@@ -1,19 +1,18 @@
 TODO
+1. keyboard needs to be built out (I already inputted the basic key layout) It needs functions to operate
 
-6. speaker needs to be made [added comment in speaker and added sound function in cpu]
+2. CPU MOSTLY DONE. Need help with three instructions which rely on the keyboard. (marked them)
 
-9. figure out how to host/run code through a browser (node's express could work?)
+3. Find a way to run a local server for testing (maybe using npm express?)
 
-7. monitor needs to be fixed
+4. read note at the bottom of index.ts
 
-8. keyboard needs to be fixed [Missing a function to finish cpu instructions -> see keyboard note]
+5. speaker needs to be made
 
-9. test
+6. monitor needs to be fixed
 
-
-------IMPORTANT--------
-
-It looks like the reason we are getting errors for the monitor and now the keyboard is because 
-objects like document and window are used for browser based code while node.js is a server side langauge environment that
-doesnt contain these in its language. So running npm start will casue these errors to throw. We need to find a way to run this code in the web browser
-see here: https://stackoverflow.com/questions/45964178/referenceerror-window-is-not-defined-at-object-anonymous-node-js 
+works
+browserify install
+compile system.js as entry point
+bundle.js in html 
+run express server
