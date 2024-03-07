@@ -1,18 +1,5 @@
 TODO
-1. keyboard needs to be built out (I already inputted the basic key layout) It needs functions to operate
 
-2. CPU MOSTLY DONE. Need help with three instructions which rely on the keyboard. (marked them)
+1. no output when running in browser
 
-3. Find a way to run a local server for testing (maybe using npm express?)
-
-4. read note at the bottom of index.ts
-
-5. speaker needs to be made
-
-6. monitor needs to be fixed
-
-works
-browserify install
-compile system.js as entry point
-bundle.js in html 
-run express server
+run c file then go to 127.0.0.1:3000
