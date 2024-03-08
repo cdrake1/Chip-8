@@ -28,7 +28,7 @@ export class cpu extends hardware{
     
 
     //cpu constructor -- creates the cpu and initializes its variables
-    constructor(id: number, name: string, _monitor: monitor,_keyboard: techmoKeyboard, _speaker: speaker) {
+    constructor(id: number, name: string, _monitor: monitor,_keyboard: techmoKeyboard, _speaker: speaker, _memory: memory) {
         super(id, name);    //passes cpu to hardware
         this.registers = new Uint8Array(16);
         this.stack  = new Uint8Array(16);
@@ -41,7 +41,7 @@ export class cpu extends hardware{
         this.paused = false;
         this._monitor = _monitor;
         this._keyboard = _keyboard;
-        
+        this._memory = _memory;
     }
 
     //Simple function to decrement timers if theyre active
@@ -59,6 +59,8 @@ export class cpu extends hardware{
     {
         //Fetch the opcode
         const opcode = this.fetch();
+
+        console.log(opcode);    //testing
 
         //switch match opcode to instruction
         const instruction = this.decode(opcode);
@@ -118,13 +120,16 @@ export class cpu extends hardware{
             break;
         case 0x4000:
             inputInstruction = "SNEVxbyte";
+            break;
         case 0x5000:
             inputInstruction = "SEVxVy";
             break;
         case 0x6000:
             inputInstruction= "LDVxbyte";
+            break;
         case 0x7000:
             inputInstruction = "ADDVxbyte";
+            break;
         case 0x8000:
             switch(inputOpcode & 0xF00F) //test for which of 0x8000 it is
                 {
@@ -173,6 +178,7 @@ export class cpu extends hardware{
             break;
         case 0xD000:
             inputInstruction = "DRWVxVynibble";
+            break;
         case 0xF000:
             switch(inputOpcode & 0xFF) // check last two digits
             {

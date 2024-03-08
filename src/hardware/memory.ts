@@ -5,7 +5,6 @@
 
 //import hardware and fs module. fs module allows reading and writing to files
 import { hardware } from "./hardware";
-import * as fs from 'fs';
 
 //memory class -- child class of hardware
 export class memory extends hardware{
@@ -74,6 +73,8 @@ export class memory extends hardware{
         for (let i = 0; i < ROMbuf.length; i++) {
             this.generalMemory[startAddress + i] = ROMbuf[i];
         }
+
+        //this.test();
     }
 
     //dumps the memory
