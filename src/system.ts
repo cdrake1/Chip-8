@@ -28,6 +28,7 @@ export class System extends hardware {
     constructor(id: number, name: string) {
         super(id, name); //pass system to hardware constructor
         this._mem = new memory(0, "RAM"); //create new memory hardware
+        this._mem.ROMBuffer("../roms/INVADERS");
         this._keyboard = new techmoKeyboard(0, "Keyboard"); //creates new keyboard hardware
         this._monitor = new monitor(0,"Monitor"); //creates new monitor hardware
         this._speaker = new speaker(0, "Speaker"); //creates new speaker hardware
@@ -45,7 +46,6 @@ export class System extends hardware {
         this._monitor.log("created");
         this._keyboard.log("Elevate Keyboard");
         this._clock.log("created");
-        this._mem.ROMBuffer("../roms/SPACE_INVADERS");
         this._clock.cycle();
         return true;
     }
