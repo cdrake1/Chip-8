@@ -1,5 +1,6 @@
 TODO
 
-1. no output when running in browser
+1. no output when running in browser (this is most likley due to opcodes being incorrectly read into the program see console.log() returning only 0 for opcodes)
 2. Cpu cycle appears to be functioning correctly as multiple instructions are being called
 3. Consider adding console.log("InstructionName" executed correctly) to every instruction to see which instructions are functioning correctly or not
+4. Consider organizing random files such as c, package.json,etc into folders
