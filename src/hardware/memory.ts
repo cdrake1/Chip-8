@@ -11,6 +11,7 @@ export class memory extends hardware{
     generalMemory: Uint8Array;  //general memory
     spriteArray: Uint8Array; //contains 5 bytes for each of the 16 sprites
     Programsize: number; //size of ROM
+    ROMBuf: Uint8Array; //ROM buffer
 
     //memory constructor -- creates the memory
     constructor(id: number, name: string){
@@ -51,13 +52,14 @@ export class memory extends hardware{
     }
 
     //loads ROM data into a buffer
-    public async ROMBuffer(url: string) {
+    public async ROMBuffer(path: string) {
+        console.log(path);
         try {
-            const response = await fetch(url);
+            const response = await fetch(path);
             const buffer = await response.arrayBuffer();
-            const ROMbuf = new Uint8Array(buffer);
-            this.Programsize = ROMbuf.length;
-            this.loadROM(ROMbuf);
+            this.ROMBuf = new Uint8Array(buffer);
+            this.Programsize = this.ROMBuf.length;
+            this.loadROM();
         } catch (error) {
             console.error("Error loading ROM:", error);
         }
@@ -65,13 +67,13 @@ export class memory extends hardware{
     
 
     // loads the buffer (ROM data) into memory
-    public loadROM(ROMbuf: Uint8Array) {
+    public loadROM() {
         // Chip-8 programs start at location 0x200
         const startAddress: number = 0x200;
 
         // iterate through buf and add to mem
-        for (let i = 0; i < ROMbuf.length; i++) {
-            this.generalMemory[startAddress + i] = ROMbuf[i];
+        for (let i = 0; i < this.ROMBuf.length; i++) {
+            this.generalMemory[startAddress + i] = this.ROMBuf[i];
         }
 
         //this.test();
