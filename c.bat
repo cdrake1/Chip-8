@@ -19,6 +19,6 @@ REM build bundle javascript file
 echo Building bundle
 CALL browserify ".\dist\system.js" -o ".\dist\bundle.js"
 
-REM run express server
+REM run express server (Ctrl+C in Terminal to Stop Server)
 echo Starting Express server
 CALL node server.js

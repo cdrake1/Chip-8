@@ -1,5 +1,5 @@
 TODO
 
 1. no output when running in browser
-
-run c file then go to 127.0.0.1:3000
+2. Cpu cycle appears to be functioning correctly as multiple instructions are being called
+3. Consider adding console.log("InstructionName" executed correctly) to every instruction to see which instructions are functioning correctly or not
