@@ -17,8 +17,8 @@ CALL tsc --rootDir src/ --outDir dist/
 
 REM build bundle javascript file
 echo Building bundle
-browserify ".\dist\system.js" -o ".\dist\bundle.js"
+CALL browserify ".\dist\system.js" -o ".\dist\bundle.js"
 
 REM run express server
 echo Starting Express server
-node server.js
+CALL node server.js
