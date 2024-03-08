@@ -1,17 +1,19 @@
+//This file contains all of the settings and specifications needed for the typescript compiler to compile typescript into javascript
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "module": "commonjs",
-    "rootDir": "src",
-    "outDir": "dist",
-    "sourceMap": true,
-    "extendedDiagnostics": true,
-    "lib": ["ES2017", "DOM"]
+    //Target Specifies the ECMAScript target version to compile the TypeScript code to
+    "target": "ES2017", //Ensures the interoperability of web pages across different web browsers, 2017 release
+    "module": "commonjs", //indicates the use of CommonJS modules - the original way to package JavaScript code for Node.js
+    "rootDir": "src",//Compile files from src directory
+    "outDir": "dist",//Output compiled files into dist directory
+    "sourceMap": true, //Generates .map files for all compiled files
+    "extendedDiagnostics": true, //Helps with compiler errors
+    "lib": ["ES2017", "DOM"] //Specifies the libraries that are available to the TypeScript code during compilation. 
   },
-  "include": [
+  "include": [ //To include all files in the src directory in the compilation process
     "src/"
   ],
-  "exclude": [
+  "exclude": [ //Exclude files in node_modules from being compiled
     "./node_modules"
   ]
 }
