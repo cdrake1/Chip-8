@@ -28,7 +28,11 @@ export class System extends hardware {
     constructor(id: number, name: string) {
         super(id, name); //pass system to hardware constructor
         this._mem = new memory(0, "RAM"); //create new memory hardware
-        this._mem.ROMBuffer("../roms/INVADERS");
+        
+        //CURRENT ISSUE EXISTS HERE!
+        this._mem.ROMBuffer("/roms/logo.ch8");
+
+
         this._keyboard = new techmoKeyboard(0, "Keyboard"); //creates new keyboard hardware
         this._monitor = new monitor(0,"Monitor"); //creates new monitor hardware
         this._speaker = new speaker(0, "Speaker"); //creates new speaker hardware
@@ -36,6 +40,7 @@ export class System extends hardware {
         this._clock = new clock(0, "Clock", this._cpu); //creates new clock hardware
         this.running  = false;
         this.startSystem(); //start the system(press the power button)
+        console.log("System.ts Constructor Completed");
     }
 
     //turn the system on and output what hardware was created

@@ -51,8 +51,10 @@ export class memory extends hardware{
         }
     }
 
+    //CURRENT ISSUE EXISTS HERE!
     //loads ROM data into a buffer
-    public async ROMBuffer(path: string) {
+    public async ROMBuffer(path: string) {  
+        console.log("rombuffer");
         console.log(path);
         try {
             const response = await fetch(path);
@@ -65,7 +67,6 @@ export class memory extends hardware{
         }
     }
     
-
     // loads the buffer (ROM data) into memory
     public loadROM() {
         // Chip-8 programs start at location 0x200
@@ -74,6 +75,7 @@ export class memory extends hardware{
         // iterate through buf and add to mem
         for (let i = 0; i < this.ROMBuf.length; i++) {
             this.generalMemory[startAddress + i] = this.ROMBuf[i];
+            console.log(this.ROMBuf[i]);
         }
 
         //this.test();
