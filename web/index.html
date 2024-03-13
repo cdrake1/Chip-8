@@ -4,28 +4,23 @@
 <html lang="en">
     <head>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="/favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon"> <!-- icon for browser -->
+
+        <link rel="stylesheet" href="style.css"> <!-- css styling -->
         <title>CHIP-8 EMULATOR</title>
     </head>
     <body>
         <main>
             <h1> CHIP-8 EMULATOR</h1>
             <canvas></canvas>
-            <script src="/bundle.js"></script>
+            <script src="/bundle.js"></script> <!-- JS bundle -->
 
-
-            <label for="thisfile">Please select a ROM to load:</label> <!-- label for button -->
-            <input type="file" id="uploadID" name="thisfile" onchange="acceptROM(event)" /> <!-- button to accept file and then call acceptROM() -->
-
-            <script> 
-                //JS script to grab input file and call system
-                function acceptROM(e){
-                    const file = e.target.files[0];
-                    createSystem(file);
-                }
-
-            </script>
+            <form action="/uploadFile" method="post">
+                <label for="thisfile">Please select a ROM to load:</label> <!-- label for button -->
+                <input type="file" id="uploadID" name="thisfile"/> <!-- button to accept file and then call acceptROM() -->
+                <input type="submit"/>
+            </form>
+            
         </main>
     </body>
 </html>
