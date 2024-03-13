@@ -10,3 +10,6 @@ TODO
 - I attempted to add html to grab an input file from the user and then pass that to system
 which would then load it into memory. 
 - This did not work and html is saying it doesnt know what the function I called is. Will look again tomorrow
+
+- express is server side
+- look at housing thing

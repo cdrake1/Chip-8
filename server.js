@@ -1,7 +1,8 @@
 const express = require('express'); //import express
-const path = require('path');   //module to assist in file directory/paths
-
 const app = express();  //creates an instance of express/server
+
+
+const path = require('path');   //module to assist in file directory/paths
 const PORT = process.env.PORT || 3000;  //checks if a port is available or defaults to port 3000
 
 //static files... make these directories available to the server
