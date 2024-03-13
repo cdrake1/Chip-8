@@ -6,13 +6,15 @@ const PORT = process.env.PORT || 3000;  //checks if a port is available or defau
 //static files... make these directories available to the server
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'web')));
+app.use(express.static(path.join(__dirname, 'roms')));
 
 //route for server to serve as entry point for web application
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', './web/index.html'));
 });
 
-//post request to accept file input in browser/html
+//post request to accept file input in browser
+/*
 app.post('/uploadFile',function(req,res){
     if(req.file){
         res.send('File uploaded successfully!');
@@ -20,6 +22,15 @@ app.post('/uploadFile',function(req,res){
     else{
         res.status(404).send("An error occurred when uploading the file");
     }
+})
+*/
+
+//post request to accept file input in browser/html
+app.post('/uploadFile',function(req,res){
+    const selectedROM = req.body.romSelect;
+
+    const romPath = path.join('roms', `${selectedROM}`);
+    res.send('ROM loaded and processed successfully!' + romPath);
 })
 
 //start server using port and listen for HTTP requests
