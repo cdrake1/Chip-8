@@ -53,12 +53,11 @@ export class memory extends hardware{
 
     //CURRENT ISSUE EXISTS HERE!
     //loads ROM data into a buffer
-    public async ROMBuffer(path: string) {  
+    public async ROMBuffer(path: File) {  
         console.log("rombuffer");
         console.log(path);
         try {
-            const response = await fetch(path);
-            const buffer = await response.arrayBuffer();
+            const buffer = await path.arrayBuffer();
             this.ROMBuf = new Uint8Array(buffer);
             this.Programsize = this.ROMBuf.length;
             this.loadROM();

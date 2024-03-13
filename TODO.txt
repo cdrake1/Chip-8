@@ -4,3 +4,9 @@ TODO
 2. Cpu cycle appears to be functioning correctly as multiple instructions are being called
 3. Consider adding console.log("InstructionName" executed correctly) to every instruction to see which instructions are functioning correctly or not
 4. Consider organizing random files such as c, package.json,etc into folders
+
+--Update-- Collin
+
+- I attempted to add html to grab an input file from the user and then pass that to system
+which would then load it into memory. 
+- This did not work and html is saying it doesnt know what the function I called is. Will look again tomorrow
