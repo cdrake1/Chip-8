@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', './web/index.html'));
 });
 
+//post request to accept file input in browser/html
 app.post('/uploadFile',function(req,res){
     if(req.file){
         res.send('File uploaded successfully!');

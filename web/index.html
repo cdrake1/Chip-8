@@ -15,12 +15,12 @@
             <canvas></canvas>
             <script src="/bundle.js"></script> <!-- JS bundle -->
 
-            <form action="/uploadFile" method="post">
+            <form action="/uploadFile" method="post"> <!-- user uploads there own file which we pass to server side -->
                 <label for="thisfile">Please select a ROM to load:</label> <!-- label for button -->
-                <input type="file" id="uploadID" name="thisfile"/> <!-- button to accept file and then call acceptROM() -->
-                <input type="submit"/>
+                <input type="file" id="uploadID" name="thisfile"/> <!-- button to accept file -->
+                <input type="submit"/> <!-- submit HTTP POST request to server side -->
             </form>
-            
+
         </main>
     </body>
 </html>
