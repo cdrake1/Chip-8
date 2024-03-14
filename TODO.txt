@@ -11,5 +11,5 @@ TODO
 which would then load it into memory. 
 - This did not work and html is saying it doesnt know what the function I called is. Will look again tomorrow
 
-- express is server side
-- look at housing thing
+
+-- server.js needs to connect to system somehow...

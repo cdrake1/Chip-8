@@ -1,12 +1,16 @@
 const express = require('express'); //import express
 const app = express();  //creates an instance of express/server
 const path = require('path');   //module to assist in file directory/paths
+const bodyParser = require('body-parser');
+const { System } = require('./dist/bundle'); // Adjust the path as per your file structure
 const PORT = process.env.PORT || 3000;  //checks if a port is available or defaults to port 3000
 
 //static files... make these directories available to the server
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'web')));
 app.use(express.static(path.join(__dirname, 'roms')));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 //route for server to serve as entry point for web application
 app.get('/', (req, res) => {
@@ -28,9 +32,8 @@ app.post('/uploadFile',function(req,res){
 //post request to accept file input in browser/html
 app.post('/uploadFile',function(req,res){
     const selectedROM = req.body.romSelect;
-
     const romPath = path.join('roms', `${selectedROM}`);
-    res.send('ROM loaded and processed successfully!' + romPath);
+    const system = new System(0, "System", romPath); // Create a new instance of the System class
 })
 
 //start server using port and listen for HTTP requests

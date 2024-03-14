@@ -50,14 +50,13 @@ export class memory extends hardware{
             this.generalMemory[0x000 + i] = this.spriteArray[i];
         }
     }
-
-    //CURRENT ISSUE EXISTS HERE!
+    
     //loads ROM data into a buffer
-    public async ROMBuffer(path: File) {  
-        console.log("rombuffer");
+    public async ROMBuffer(path: string) {
         console.log(path);
         try {
-            const buffer = await path.arrayBuffer();
+            const response = await fetch(path);
+            const buffer = await response.arrayBuffer();
             this.ROMBuf = new Uint8Array(buffer);
             this.Programsize = this.ROMBuf.length;
             this.loadROM();

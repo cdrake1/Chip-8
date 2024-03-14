@@ -25,12 +25,14 @@ export class System extends hardware {
     
 
     //system constructor -- creates the system and instances of hardware(cpu, mem)
-    constructor(id: number, name: string, file: File) {
+    constructor(id: number, name: string, path: string) {
         super(id, name); //pass system to hardware constructor
         this._mem = new memory(0, "RAM"); //create new memory hardware
+
+        console.log(path);
         
         //CURRENT ISSUE EXISTS HERE!
-        this._mem.ROMBuffer(file);
+        this._mem.ROMBuffer(path);
 
 
         this._keyboard = new techmoKeyboard(0, "Keyboard"); //creates new keyboard hardware
@@ -58,12 +60,5 @@ export class System extends hardware {
     //turns the system off
     public stopSystem(): boolean {
         return false;
-    }
-}
-
-//tried to call this from html and then create system and pass in input file
-export class createSystem{
-    public createSystem(file:File){
-        let system: System = new System(0, "System", file); //create an instance of system
     }
 }
