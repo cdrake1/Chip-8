@@ -14,4 +14,9 @@ which would then load it into memory.
 
 -- server.js needs to connect to system somehow...
 
-WINDOW EVENT THROWING ERRORS USING 
+--Update Christian--
+Fixed The document and window errors being thrown by the keyboard and monitor
+Also fixed one missing instruction. One still remains undone.
+The only errors being thrown now by the server have to do with the ROM being improperly READ
+I have not messed around with pausing the system until the rom is read properly. that might be a good idea
+Goodluck.
