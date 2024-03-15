@@ -13,3 +13,5 @@ which would then load it into memory.
 
 
 -- server.js needs to connect to system somehow...
+
+WINDOW EVENT THROWING ERRORS USING 

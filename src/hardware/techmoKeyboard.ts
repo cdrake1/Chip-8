@@ -37,9 +37,14 @@ export class techmoKeyboard extends hardware{
             86: 0xf // V - F
         }; //keymap
 
-        //event listeners that handle keyboard input -- browser
-        window.addEventListener('keydown', this.keyDown.bind(this), false);
-        window.addEventListener('keyup', this.keyUp.bind(this), false);
+        // Enable raw mode to capture key events
+        process.stdin.setRawMode(true);
+
+        // Resume stdin to begin reading
+        process.stdin.resume();
+
+        // Listen for 'data' events on stdin (keypresses)
+        process.stdin.on('data', (key) => this.handleInput(key.toString()));
     }//constructor
 
     //initializes all keyboard values to false
@@ -52,24 +57,33 @@ export class techmoKeyboard extends hardware{
         //false == not pressed
     }
 
-    //event listener -- looks to see if keys are up
-    keyUp(event){
-        let keyPressed: number = this.keymap[event.key];
-        this.keyboard[keyPressed] = false;
+    private handleInput(key: string) {
+        // Handle Ctrl+C to exit the process
+        if (key === '\u0003') {
+            process.exit();
+        }//if
 
-        // dow we need code for next key press?
-    }
+        // Check if the pressed key has a mapping in the keymap
+        const keyPressed = this.keymap[key.toLowerCase()];
+        if (keyPressed !== undefined) {
+            // Toggle the state of the corresponding key in the keyboard array
+            this.keyboard[keyPressed] = !this.keyboard[keyPressed];
+        }//if
+    }//handleInput
 
-    //event listener -- looks to see if keys are being pushed down
-    keyDown(event){
-        let keyPressed: number = this.keymap[event.key];
-        this.keyboard[keyPressed] = true;
-    }
-    
-    //is a certain key pressed?
-    public isKeyPressed(key: number): boolean{
-        return this.keyboard[key];  //returns key status
-    }
-    //Missing a function (see note line 402 in cpu)
+    public isKeyPressed(key: number): boolean {
+        // Check if a specific key is currently pressed
+        return this.keyboard[key];
+    }//isKeyPressed
 
+    public waitForKeyPress(): number {
+        let pressedKey: number | undefined;
+        // Synchronously wait for a key press
+        while (pressedKey === undefined) {
+            //might want to add timer here? 
+        }
+        return pressedKey;
+    }
 }//techmoKeyboard
+   
+

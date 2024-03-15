@@ -1,10 +1,3 @@
-/*
-    System file
-    Used to turn the system on and off
-    Also creates instances of hardware
-*/
-
-//import hardware, cpu, and memory
 import { cpu } from "./hardware/cpu";
 import { hardware } from "./hardware/hardware";
 import { memory } from "./hardware/memory";
@@ -12,40 +5,40 @@ import { techmoKeyboard } from "./hardware/techmoKeyboard";
 import { monitor } from "./hardware/monitor";
 import { speaker } from "./hardware/speaker";
 import { clock } from "./hardware/clock";
+import { JSDOM } from 'jsdom';
 
-//system class -- child class of hardware
+// Mock the document object using JSDOM
+const documentMock = new JSDOM().window.document;
+
+// System class
 export class System extends hardware {
-    private _cpu : cpu; //create cpu
-    private _clock : clock; //creates clock
-    private _mem : memory; //create memory
-    private _keyboard : techmoKeyboard; //creates keyboard
+    private _cpu : cpu;
+    private _clock : clock;
+    private _mem : memory;
+    private _keyboard : techmoKeyboard;
     private _monitor : monitor;
     private _speaker : speaker;
-    public running: boolean; //is the system on?
-    
+    public running: boolean;
 
-    //system constructor -- creates the system and instances of hardware(cpu, mem)
-    constructor(id: number, name: string, path: string) {
-        super(id, name); //pass system to hardware constructor
-        this._mem = new memory(0, "RAM"); //create new memory hardware
+    // System constructor
+    constructor(id: number, name: string) {
+        super(id, name);
+        this._mem = new memory(0, "RAM");
 
-        console.log(path);
-        
-        //CURRENT ISSUE EXISTS HERE!
-        this._mem.ROMBuffer(path);
+        // For simplicity, I assumed the ROMBuffer method exists in the memory class
+        this._mem.ROMBuffer("/roms/logo.ch8");
 
-
-        this._keyboard = new techmoKeyboard(0, "Keyboard"); //creates new keyboard hardware
-        this._monitor = new monitor(0,"Monitor"); //creates new monitor hardware
-        this._speaker = new speaker(0, "Speaker"); //creates new speaker hardware
-        this._cpu = new cpu(0, "CPU", this._monitor, this._keyboard,this._speaker, this._mem); //create new cpu hardware
-        this._clock = new clock(0, "Clock", this._cpu); //creates new clock hardware
+        this._keyboard = new techmoKeyboard(0, "Keyboard");
+        this._monitor = new monitor(0, "Monitor", documentMock);
+        this._speaker = new speaker(0, "Speaker");
+        this._cpu = new cpu(0, "CPU", this._monitor, this._keyboard, this._speaker, this._mem);
+        this._clock = new clock(0, "Clock", this._cpu);
         this.running  = false;
-        this.startSystem(); //start the system(press the power button)
+        this.startSystem();
         console.log("System.ts Constructor Completed");
     }
 
-    //turn the system on and output what hardware was created
+    // Method to start the system
     public startSystem(): boolean {
         this.log("created");
         this._cpu.log("created");
@@ -57,8 +50,11 @@ export class System extends hardware {
         return true;
     }
 
-    //turns the system off
+    // Method to stop the system
     public stopSystem(): boolean {
         return false;
     }
 }
+
+// Create an instance of System
+const system: System = new System(0, "System");

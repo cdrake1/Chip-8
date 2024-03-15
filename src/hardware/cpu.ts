@@ -391,11 +391,10 @@ export class cpu extends hardware{
                 this.registers[x] = this.delayTimer;
                 break;
             case "LDVxK":
-            //!All execution stops until a key is pressed, then the value of that key is stored in Vx.
-            //Need this instruction to be built \/\/\/
-
-
-
+            //All execution stops until a key is pressed, then the value of that key is stored in Vx.
+                this.paused = true;
+                this.registers[x] = this._keyboard.waitForKeyPress();
+                this.paused = false;
                 break;
             case "LDDTVx":
             //DT is set equal to the value of Vx.
