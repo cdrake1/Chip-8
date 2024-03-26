@@ -1,22 +1,17 @@
-TODO
+Update
+Currently Memory and reading in the ROM is the MAIN ISSUE
+I believe I fixed the code so that the system does NOT run until the memory has been loaded
+HOWEVER, I can not get the memory to properly load, I believe this to be because of one of two issues or
+maybe both issues.
+I confirmed that the switch is correctly reading in the opcodes by console.log"Found" showing it finds 0x0000 as 0000.
 
-1. no output when running in browser (ERROR IS DUE TO PATH NOT BEING READ PROPERLY FOR ROM)
-2. Cpu cycle appears to be functioning correctly as multiple instructions are being called
-3. Consider adding console.log("InstructionName" executed correctly) to every instruction to see which instructions are functioning correctly or not
-4. Consider organizing random files such as c, package.json,etc into folders
+1. The Program Counter is not accurately pulling the correct location in general memory HENCE the opcode -
+0000 which indicates its pulling from empty memory furhter ahead in the general memory.
+2. The Hexidemical is not correctly being read into the general memory, I believe this could be the case
+because when inspecting the logos.ch8 file using a binary viewer, the hexidemical printed in the console
+do not align with the ones from the viewer.
 
---Update-- Collin
-
-- I attempted to add html to grab an input file from the user and then pass that to system
-which would then load it into memory. 
-- This did not work and html is saying it doesnt know what the function I called is. Will look again tomorrow
-
-
--- server.js needs to connect to system somehow...
-
---Update Christian--
-Fixed The document and window errors being thrown by the keyboard and monitor
-Also fixed one missing instruction. One still remains undone.
-The only errors being thrown now by the server have to do with the ROM being improperly READ
-I have not messed around with pausing the system until the rom is read properly. that might be a good idea
-Goodluck.
+ADDED c dev, which utilizes nodemon, which will be very useful for us when we can get the memory loaded.
+Nodemon constantly resets the server when you click cntrl S to save a file, so you can actively check your
+changes without having to constantly run C.bat. However it doesnt work if the program crashes, so it isnt
+of much use to us now.

@@ -32,7 +32,7 @@ export class cpu extends hardware{
         super(id, name);    //passes cpu to hardware
         this.registers = new Uint8Array(16);
         this.stack  = new Uint8Array(16);
-        this.programCounter  = 0x200;
+        this.programCounter  = 0x0200;
         this.stackPointer = 0x00;
         this.indexRegister = 0x0000;
         this.delayTimer = 0; 
@@ -76,17 +76,15 @@ export class cpu extends hardware{
     }//step
   
     //Get address from memory
-    fetch()
-    {
-        for(let i =0; i< this.cpuSpeed; i++)
-        {
-            if(this.paused != true)
-            {
-                let opcode = (this._memory[this.programCounter] << 8 | this._memory[this.programCounter+1]) //build opcode using or (opcode consists of two byte)
-                return(opcode);
-            }//if
-        }//for
-    }//fetch
+    fetch() {
+        if (!this.paused) {
+            console.log(this._memory.generalMemory[this.programCounter] << 8);
+            console.log(this._memory.generalMemory[this.programCounter + 1]);
+            const opcode = (this._memory.generalMemory[this.programCounter] << 8) | this._memory.generalMemory[this.programCounter + 1];
+            console.log("Opcode:", opcode.toString(16).padStart(4, '0').toUpperCase());
+            return opcode;
+        }
+    }
 
     //decode opcode
     decode(inputOpcode: number)
@@ -99,6 +97,7 @@ export class cpu extends hardware{
         switch(inputOpcode & 0xF000) //Were going to check for a match at the first digit
         {
         case 0x0000:
+            console.log("Found");
             switch(inputOpcode) //test for which of 0x0000 it is
             {
                 case 0x00E0:
@@ -427,7 +426,7 @@ export class cpu extends hardware{
                     this.registers[i] = this._memory[this.indexRegister + i];
                 break;
             default:
-                throw new Error('BAD INSTRUCTION!');
+                throw new Error('BAD INSTRUCTION!' + inputInstruction);
         }//switch
   
     }//execute
